@@ -4,16 +4,22 @@
     <title>Travel Tracker</title>
   </head>
   <body>
-      <section class="login-container">
-        <h1>Welcome to Travel Tracker</h1>
-        <section class="login">
-          <label for="username">username:</label>
-          <input type="text" id="username" name="username">
-          <label for="password">password:</label>
-          <input type="password" id="password" name="password">
-          <input type="submit" value="Log in!">          
-        </section>
+    <section class="login-container">
+      <h1>Welcome to Travel Tracker</h1>
+      <section class="login">
+        <label for="username">username:</label>
+        <input type="text" id="username"name="username">
+        <label for="password">password:</label>
+        <input type="password" id="password"name="password">
+        <input id="login-button" type="submit" value="Log in!">          
       </section>
+    </section>
+    <section class="traveler hidden">
+      <h1>Welcome Traveler!</h1>
+    </section>
+    <section class="agent hidden">
+      <h1>Welcome Agent!</h1>
+    </section>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
 </html>
