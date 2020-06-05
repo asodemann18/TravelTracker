@@ -1,18 +1,18 @@
 let tripData = [
   {
     "id": 1,
-    "userID": 44,
-    "destinationID": 49,
+    "userID": 1,
+    "destinationID": 6,
     "travelers": 1,
-    "date": "2019/09/16",
+    "date": "2020/08/04",
     "duration": 8,
-    "status": "approved",
+    "status": "pending",
     "suggestedActivities": []
     },
     {
     "id": 2,
-    "userID": 35,
-    "destinationID": 25,
+    "userID": 2,
+    "destinationID": 2,
     "travelers": 5,
     "date": "2020/10/04",
     "duration": 18,
@@ -60,3 +60,5 @@ let tripData = [
     "suggestedActivities": []
     }
 ]
+
+export default tripData;

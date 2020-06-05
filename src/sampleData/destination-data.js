@@ -48,3 +48,5 @@ let destinationData = [
     "alt": "lit up city at night"
   }
 ]
+export default destinationData;
+
