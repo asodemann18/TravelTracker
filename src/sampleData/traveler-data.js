@@ -30,3 +30,5 @@ let travelerData = [
     "travelerType": "shopper"
     }
 ]
+
+export default travelerData;

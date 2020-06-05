@@ -1,21 +1,25 @@
 import chai from 'chai';
-import Users from '../src/User';
 const expect = chai.expect;
-
+import AllTravelers from '../src/AllTravelers';
+import travelerData from '../src/sampleData/traveler-data';
 
 describe('See if the tests are running', function() {
+  let travelersInfo, travelers;
+
+  beforeEach(function() {
+    travelersInfo = travelerData;
+    travelers = new AllTravelers(travelersInfo);
+  })
   
   it('should be a function', () => {
-    expect(Users).to.be.a('function')
+    expect(AllTravelers).to.be.a('function')
   });
 
-  it('should return new instance of Hydration', () => {
-    const users = new Users();
-    expect(users).to.be.an.instanceOf(Users);
+  it('should return new instance of AllTravelers', () => {
+    expect(travelers).to.be.an.instanceOf(AllTravelers);
   });
 
-  // it('should have a username property', () => {
-  //   const Users = new Users();
-  //   expect(Users.username).to.be.an.instanceOf(Users);
-  // });
+  it('should take in every travelers\'s data', () => {
+    expect(travelers.travelers.length).to.be.equal(6);
+  });
 });

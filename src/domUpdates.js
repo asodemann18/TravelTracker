@@ -1,17 +1,21 @@
 const domUpdates = {
-  submitLogin(param) {
-    let login = document.querySelector('.login-container');
-    let username = document.getElementById('username').value;
-    let password = document.getElementById('password').value;
-    let traveler = document.querySelector('.traveler');
-    let agency = document.querySelector('.agent');
-
+  submitLogin() {
+    const login = document.querySelector('.login-container');
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const traveler = document.querySelector('.traveler');
+    const agency = document.querySelector('.agent');
     if (username === 'agency' && password === 'travel2020') {
       agency.classList.remove('hidden')
       login.classList.add('hidden')
-    } else if (username.includes(param) && password === 'travel2020') {
+      return 'agent' 
+    } else if (username.includes('traveler') && 
+              (username.split("traveler")[1] < 51 && username.split("traveler")[1] > 0) &&
+               password === 'travel2020') {
       traveler.classList.remove('hidden')
       login.classList.add('hidden')
+      //console.log(username.split("traveler")[1]);
+      return username
     } else {
       alert('Incorrect username or password');
     }
