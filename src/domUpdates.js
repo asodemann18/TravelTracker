@@ -23,11 +23,24 @@ const domUpdates = {
   displayWelcome(theTraveler) {
     const welcome = document.querySelector('.welcome');
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
+  },
+
+  displayTravelersTrips(theTraveler) {
+    const tripInfoSection = document.querySelector('.trip-info')
+    const tripDetails = theTraveler.getTrips();
+    const destinationDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
+    
+      tripInfoSection.innerHTML = destinationDetails;
+ 
+  },
+  getTripFormat(data) {
+    return `<ul>
+              <li>Destination: ${data.destination}</li>
+              <li>Duration: ${data.duration}</li>
+              <li>Status: ${data.status}</li>
+              <li>Date: ${data.date}</li>
+              <li>Travelers: ${data.travelers}</li>
+            </ul>`;
   }
-
-  // displayTravelersTrips(theTraveler) {
-
-  // },
-  //display all trips for a user sorted by most recent to least
 }
 export default domUpdates;

@@ -1,4 +1,5 @@
 $primary-background: #A4D3EE;
+$border: solid 2px black;
 
 @mixin flexin($direction) {
   display: flex;

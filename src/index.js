@@ -29,6 +29,7 @@ const fetchData = () => {
       allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
       domUpdates.displayWelcome(traveler);
+      domUpdates.displayTravelersTrips(traveler);
     })
     .catch(error => console.log(error.message));
 }
