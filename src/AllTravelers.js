@@ -7,31 +7,42 @@ class AllTravelers {
     this.destinations = allDestinationsData;
   }
 
-  getPendingTrips() {
-    let filteredTrips = this.trips.filter(trip => trip.date >= moment().format('YYYY/MM/DD') && trip.status === 'pending').map(trip => {
-      let trips = {};
-      trips.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
-      trips.date = trip.date;
-      trips.duration = trip.duration;
-      trips.travelers = trip.travelers;
-      trips.destination = this.destinations.find(dest => dest.id === trip.destinationID).destination;
-      trips.status = trip.status
-      return trips
-    })
-    return filteredTrips;
+  getPendingTrips(theStatus) {
+    if (theStatus === 'pending') {
+      let filteredTrips = this.trips.filter(trip => trip.date >= moment().format('YYYY/MM/DD') && trip.status === 'pending').map(trip => {
+        let tripsObj = {};
+        tripsObj.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
+        tripsObj.date = trip.date;
+        tripsObj.duration = trip.duration;
+        tripsObj.travelers = trip.travelers;
+        tripsObj.destination = this.destinations.find(dest => dest.id === trip.destinationID).destination;
+        tripsObj.status = trip.status
+        return tripsObj
+      })
+      return filteredTrips;
+    } else {
+      return this.trips.map(trip => {
+        let tripsObj = {};
+        tripsObj.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
+        tripsObj.date = trip.date;
+        tripsObj.duration = trip.duration;
+        tripsObj.travelers = trip.travelers;
+        tripsObj.destination = this.destinations.find(dest => dest.id === trip.destinationID).destination;        
+        tripsObj.status = trip.status
+        return tripsObj
+      })
+    }
   }
-
 }
 
+// Total income generated this year (should be 10% of user trip cost)
+//return array of object with:
+//lodgingCost total
+//flightCost * Travelers
+//total
+//fee (10% of total)
+//////////////////////////////
+//filter for this year - trips
+//calc destinations 
+
 export default AllTravelers;
-
-//New trip requests (a user’s “pending” trips)
-
-
-//array of objects with:
-//name = travelers
-//date = trips - most recent date 
-//duration = trips
-//num travelers = trips
-//destination = destinations  
-//pending status = trips
