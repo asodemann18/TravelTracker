@@ -1,4 +1,5 @@
 import moment from 'moment'
+import _ from 'lodash'
 
 class AllTravelers {
   constructor(allTravelerData, allTripsData, allDestinationsData) {
@@ -33,8 +34,8 @@ class AllTravelers {
     }
   }
 
-  calculateIndividualCost() { //and status === approved
-    return this.trips.map(trip => {
+  calculateIndividualCost() {
+    return this.trips.filter(trip => trip.status === 'approved').map(trip => {
       const tripsObj = {};
       tripsObj.userID = trip.userID;
       tripsObj.date = trip.date;
@@ -46,35 +47,13 @@ class AllTravelers {
     });
   }
 
-  // calculateTotalCost() {
-  //   const currentYearCost = this.trips.filter(trip => moment(trip.date, 'YYYY/MM/DD').format('YYYY') === moment().format('YYYY')).map(trip => {
-  //     const tripsObj = {};
-  //     tripsObj.lodgingCost = 0;
-  //     tripsObj.flightCost = 0;
-  //     tripsObj.total = 0; //lodging + flight
-  //     tripsObj.fee = 0; // total*.10
-  //   })
-  //   //&& trip.status === 'approved')
-  //   currentYearCost
-  //   console.log(currentYearCost)
-  //   return currentYearCost
-  // }
+  calculateTotalCost() {
+    const allCosts = this.calculateIndividualCost();
+    const currentYearCost = allCosts.filter(cost => moment(cost.date, 'YYYY/MM/DD').format('YYYY') === moment().format('YYYY'))
+    const costInfoOnly = _.map(currentYearCost, _.partialRight(_.pick, ['lodgingCost', 'flightCost', 'total', 'fee',]))
+    return [_.mergeWith({}, ..._.map(costInfoOnly), _.add)];
+  }
 
 }
-
-// Total income generated this year (should be 10% of user trip cost)
-//return array of object with:
-
-//Userid
-//date
-//lodgingCost * days
-//flightCost * Travelers
-//total
-//fee (10% of total)
-//////////////////////////////
-//filter for this year - trips
-//calc destinations 
-//find cost for every person in separate func travelCost - name and id
-//
 
 export default AllTravelers;
