@@ -31,5 +31,9 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "moment": "^2.26.0",
+    "moment-range": "^4.0.2"
+  }
 }
