@@ -3,11 +3,9 @@ const expect = chai.expect;
 import AllTravelers from '../src/AllTravelers';
 import travelerData from '../src/sampleData/traveler-data';
 import tripsData from '../src/sampleData/trip-data';
-import destinationData from '../src/sampleData/destination-data'
-// import moment from 'moment';
+import destinationData from '../src/sampleData/destination-data';
 
-
-describe('See if the tests are running', function() {
+describe('AllTravelers', function() {
   let travelersInfo, travelers, tripsInfo, destinationInfo;
 
   beforeEach(function() {
@@ -52,27 +50,27 @@ describe('See if the tests are running', function() {
 
 
   it('should show ALL travelers trip info when no argument is passed', () => {
-    const pendingTravelers = [
+    const allTravelersInfo = [
       {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
       {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'},
       {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', status: 'pending'},
       {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', status: 'approved'},
       {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', status: 'approved'},
-      {name: 'Laverna Flawith', date: '2019/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
+      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
     ]
-    expect(travelers.getTrips()).to.deep.equal(pendingTravelers)
+    expect(travelers.getTrips()).to.deep.equal(allTravelersInfo)
   })
 
   it('should show ALL travelers trip info when argument passed is not "pending', () => {
-    const pendingTravelers = [
+    const allTravelersInfo = [
       {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
       {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'},
       {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', status: 'pending'},
       {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', status: 'approved'},
       {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', status: 'approved'},
-      {name: 'Laverna Flawith', date: '2019/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
+      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
     ]
-    expect(travelers.getTrips('xyz')).to.deep.equal(pendingTravelers)
+    expect(travelers.getTrips('xyz')).to.deep.equal(allTravelersInfo)
   })
 
   it('should calculate cost of each trip for each traveler', () => {
@@ -92,24 +90,16 @@ describe('See if the tests are running', function() {
         flightCost: 1950,
         total: 4650,
         fee: 465
-      },
-      {
-        userID: 6,
-        date: '2019/06/29',
-        lodgingCost: 630,
-        flightCost: 1200,
-        total: 1830,
-        fee: 183
       }
     ]
     expect(travelers.calculateIndividualCost()).to.deep.equal(individualTravelCosts)
    })
 
    it('should calculate cost of each trip for each traveler even when an argument is passed', () => {
-    expect(travelers.calculateIndividualCost('test').length).to.equal(3);
+    expect(travelers.calculateIndividualCost('test').length).to.equal(2);
    })
 
-  it('should calculate cost of lodging for the current year', () => {
+  it('should calculate costs/revenue for the current year', () => {
     const travelCosts = [{
       lodgingCost: 3350,
       flightCost: 2650,
@@ -148,20 +138,10 @@ describe('See if the tests are running', function() {
    })
 
    it('should show an error message if no date argument is passed', () => {
-    const traveler = [{
-      name:'Ham Leadbeater',
-      destination: 'Jakarta, Indonesia',
-      daysLeft: 4
-    }]
     expect(travelers.getTodaysTravelers('test')).to.deep.equal('Please enter date in this format: "YYYY/MM/DD')
    })
 
    it('should show an error message if date is passed in the incorrect format', () => {
-    const traveler = [{
-      name:'Ham Leadbeater',
-      destination: 'Jakarta, Indonesia',
-      daysLeft: 4
-    }]
     expect(travelers.getTodaysTravelers('08-08-2020')).to.deep.equal('Please enter date in this format: "YYYY/MM/DD')
    })
 });
