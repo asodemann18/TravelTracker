@@ -70,7 +70,6 @@ class AllTravelers {
       return 'Please enter date in this format: "YYYY/MM/DD';
     }
   }
-
 }
 
 export default AllTravelers;
