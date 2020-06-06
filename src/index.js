@@ -9,8 +9,10 @@ import './images/turing-logo.png'
 import ApiFetch from './ApiFetch';
 import domUpdates from './domUpdates';
 import AllTravelers from './AllTravelers';
+import Traveler from './Traveler';
 
-let travelers;
+let allTravelers;
+let traveler;
 
 const fetchData = () => {
   const api = new ApiFetch();
@@ -24,11 +26,11 @@ const fetchData = () => {
       tripsData: dataSet[1].trips,
       destinationsData: dataSet[2].destinations, 
     }).then(dataSet => {
-      travelers = new AllTravelers(dataSet.travelersData); 
-      //traveler instantiation
-      //agent instantiation 
+      allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
+      traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
+      domUpdates.displayWelcome(traveler);
     })
-    .catch(error => console.log(error.message))
+    .catch(error => console.log(error.message));
 }
 
 const loginButton = document.getElementById('login-button')

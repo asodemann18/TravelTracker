@@ -10,16 +10,24 @@ const domUpdates = {
       login.classList.add('hidden')
       return 'agent' 
     } else if (username.includes('traveler') && 
-              (username.split("traveler")[1] < 51 && username.split("traveler")[1] > 0) &&
+              (username.split('traveler')[1] < 51 && username.split("traveler")[1] > 0) &&
                password === 'travel2020') {
       traveler.classList.remove('hidden')
       login.classList.add('hidden')
-      //console.log(username.split("traveler")[1]);
       return username
     } else {
       alert('Incorrect username or password');
     }
+  },
+
+  displayWelcome(theTraveler) {
+    const welcome = document.querySelector('.welcome');
+    return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   }
+
+  // displayTravelersTrips(theTraveler) {
+
+  // },
+  //display all trips for a user sorted by most recent to least
 }
-//username.includes([array of ids])
 export default domUpdates;

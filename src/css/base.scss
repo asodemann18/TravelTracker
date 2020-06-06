@@ -1,6 +1,7 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import 'variables';  
 @import 'login';
+@import 'traveler';
 
 body {
   background: $primary-background;

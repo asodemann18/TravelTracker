@@ -1,0 +1,18 @@
+.traveler {
+  @include flexin(column);
+
+  header {
+    @include flexin(row);
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.trip-info {
+  @include flexin(column);
+  border: black 5px solid;
+  width: 25%;
+  height: 80vh;
+}
+

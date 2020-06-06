@@ -1,1 +1,6 @@
 $primary-background: #A4D3EE;
+
+@mixin flexin($direction) {
+  display: flex;
+  flex-direction: $direction;
+}

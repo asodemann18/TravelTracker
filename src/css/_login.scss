@@ -1,6 +1,5 @@
 .login-container {
-  display: flex;
-  flex-direction: column;
+  @include flexin(column);
   align-items: center;
   background-color: white;
   position: fixed;
@@ -16,6 +15,5 @@
 }
 
 .login {
-  display: flex;
-  flex-direction: column;
+  @include flexin(column);
 }
