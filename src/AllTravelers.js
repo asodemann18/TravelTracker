@@ -34,7 +34,7 @@ class AllTravelers {
   }
 
   calculateIndividualCost() {
-    return this.trips.filter(trip => trip.status === 'approved').map(trip => {
+    return this.trips.filter(trip => trip.date <= moment().format('YYYY/MM/DD') && trip.status === 'approved').map(trip => {
       const tripsObj = {};
       tripsObj.userID = trip.userID;
       tripsObj.date = trip.date;
