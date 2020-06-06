@@ -1,5 +1,10 @@
 .traveler {
-  @include flexin(column);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "trips cost form";
+
 
   header {
     @include flexin(row);
@@ -7,12 +12,28 @@
     justify-content: center;
     align-items: center;
   }
+
+  .trip-info {
+    grid-area: "trips";
+    border: black 5px solid;
+    width: 25%;
+    height: 80vh;
+  }
+  
+  .cost-info {
+    grid-area: "cost";
+    border: black 5px solid;
+    width: 25%;
+    height: 80vh;
+  }
+
+  .request-info {
+    grid-area: "form";
+    border: black 5px solid;
+    width: 25%;
+    height: 80vh;
+  }
 }
 
-.trip-info {
-  @include flexin(column);
-  border: black 5px solid;
-  width: 25%;
-  height: 80vh;
-}
+
 

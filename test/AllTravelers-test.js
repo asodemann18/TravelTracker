@@ -92,11 +92,11 @@ describe('AllTravelers', function() {
         fee: 465
       }
     ]
-    expect(travelers.calculateIndividualCost()).to.deep.equal(individualTravelCosts)
+    expect(travelers.calculateTravelerCost()).to.deep.equal(individualTravelCosts)
    })
 
    it('should calculate cost of each trip for each traveler even when an argument is passed', () => {
-    expect(travelers.calculateIndividualCost('test').length).to.equal(2);
+    expect(travelers.calculateTravelerCost('test').length).to.equal(2);
    })
 
   it('should calculate costs/revenue for the current year', () => {

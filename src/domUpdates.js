@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const domUpdates = {
   submitLogin() {
     const login = document.querySelector('.login-container');
@@ -26,21 +28,37 @@ const domUpdates = {
   },
 
   displayTravelersTrips(theTraveler) {
-    const tripInfoSection = document.querySelector('.trip-info')
-    const tripDetails = theTraveler.getTrips();
-    const destinationDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
-    
-      tripInfoSection.innerHTML = destinationDetails;
- 
+    const tripInfoSection = document.querySelector('.trip-info');
+    const tripDetails = theTraveler.getTrips().sort((a,b) => moment(b.date) - moment(a.date));
+    const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
+    tripInfoSection.innerHTML = formattedTripDetails;
   },
+
   getTripFormat(data) {
     return `<ul>
               <li>Destination: ${data.destination}</li>
-              <li>Duration: ${data.duration}</li>
-              <li>Status: ${data.status}</li>
               <li>Date: ${data.date}</li>
+              <li>Duration: ${data.duration}</li>
               <li>Travelers: ${data.travelers}</li>
+              <li>Status: ${data.status}</li>
+            </ul>`;
+  },
+
+  displayTravelerCosts(theTraveler) {
+    const costInfoSection = document.querySelector('.cost-info')
+    const costDetails = theTraveler.calculateTotalCost();
+    const formattedCostDetails = costDetails.map(detail => this.getCostFormat(detail)).join('');
+    costInfoSection.innerHTML = formattedCostDetails;
+  },
+
+  getCostFormat(data) {
+    return `<ul>
+              <li>Lodging: $${data.lodgingCost}</li>
+              <li>Flight: $${data.flightCost}</li>
+              <li>Total: $${data.total}</li>
+              <li>Fee: $${data.fee}</li>
             </ul>`;
   }
 }
+
 export default domUpdates;
