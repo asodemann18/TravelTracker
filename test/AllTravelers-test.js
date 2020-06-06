@@ -128,4 +128,40 @@ describe('See if the tests are running', function() {
     }]
     expect(travelers.calculateTotalCost(123)).to.deep.equal(travelCosts)
    })
+
+   it('should show travelers who are traveling on a certain date', () => {
+    const traveler = [{
+      name:'Ham Leadbeater',
+      destination: 'Jakarta, Indonesia',
+      daysLeft: 8
+    }]
+    expect(travelers.getTodaysTravelers('2020/08/04')).to.deep.equal(traveler)
+   })
+
+   it('should show travelers who are traveling on a certain date if their trip date falls during the date argument', () => {
+    const traveler = [{
+      name:'Ham Leadbeater',
+      destination: 'Jakarta, Indonesia',
+      daysLeft: 4
+    }]
+    expect(travelers.getTodaysTravelers('2020/08/08')).to.deep.equal(traveler)
+   })
+
+   it('should show an error message if no date argument is passed', () => {
+    const traveler = [{
+      name:'Ham Leadbeater',
+      destination: 'Jakarta, Indonesia',
+      daysLeft: 4
+    }]
+    expect(travelers.getTodaysTravelers('test')).to.deep.equal('Please enter date in this format: "YYYY/MM/DD')
+   })
+
+   it('should show an error message if date is passed in the incorrect format', () => {
+    const traveler = [{
+      name:'Ham Leadbeater',
+      destination: 'Jakarta, Indonesia',
+      daysLeft: 4
+    }]
+    expect(travelers.getTodaysTravelers('08-08-2020')).to.deep.equal('Please enter date in this format: "YYYY/MM/DD')
+   })
 });
