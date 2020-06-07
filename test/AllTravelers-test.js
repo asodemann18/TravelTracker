@@ -80,16 +80,18 @@ describe('AllTravelers', function() {
         date: '2020/02/25',
         lodgingCost: 650,
         flightCost: 700,
-        total: 1350,
-        fee: 135
+        subTotal: 1350,
+        fee: 135, 
+        total: 1485
       },
       {
         userID: 5,
         date: '2020/04/30',
         lodgingCost: 2700,
         flightCost: 1950,
-        total: 4650,
-        fee: 465
+        subTotal: 4650,
+        fee: 465,
+        total: 5115
       }
     ]
     expect(travelers.calculateTravelerCost()).to.deep.equal(individualTravelCosts)
@@ -103,8 +105,9 @@ describe('AllTravelers', function() {
     const travelCosts = [{
       lodgingCost: 3350,
       flightCost: 2650,
-      total: 6000,
-      fee: 600
+      subTotal: 6000,
+      fee: 600,
+      total: 6600
     }]
     expect(travelers.calculateTotalCost()).to.deep.equal(travelCosts)
    })
@@ -113,8 +116,9 @@ describe('AllTravelers', function() {
     const travelCosts = [{
       lodgingCost: 3350,
       flightCost: 2650,
-      total: 6000,
-      fee: 600
+      subTotal: 6000,
+      fee: 600,
+      total: 6600
     }]
     expect(travelers.calculateTotalCost(123)).to.deep.equal(travelCosts)
    })

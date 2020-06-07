@@ -64,12 +64,16 @@ const domUpdates = {
   },
 
   getCostFormat(data) {
-    return `<ul>
-              <li>Lodging: $${data.lodgingCost}</li>
-              <li>Flight: $${data.flightCost}</li>
-              <li>Total: $${data.total}</li>
-              <li>Fee: $${data.fee}</li>
-            </ul>`;
+    return `<h3>Total Spend YTD</h3>
+              <p>Lodging: $${data.lodgingCost}</p>
+              <br>
+              <p>Flight: $${data.flightCost}</p>
+              <br>
+              <p>Sub Total: $${data.subTotal}</p>
+              <br>
+              <p>Fee: $${data.fee}</p>
+              <br>
+              <p>Total: $${data.total}</p>`;
   },
 
   displayDestinationList(allData) {

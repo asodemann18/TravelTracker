@@ -1,10 +1,11 @@
 .traveler {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: 15% 85%;
   grid-template-areas:
     "header header "
-    "trips other";
+    "trips info";
+  
 
   header {
     @include flexin(row);
@@ -14,59 +15,60 @@
     align-items: center;
   }
 
-  .trip-info {
-    grid-area: "trips";
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .trip-section {
+    height: 80vh;
     overflow: scroll;
+  
+    .trip-info {
+      grid-area: "trips";
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: scroll;
 
-    .image-container {
-      width: 75%;
-      position: relative;
-      margin-top: 5%;
-      height: 50%;
+      .image-container {
+        width: 75%;
+        position: relative;
+        margin-top: 5%;
+        height: 50%;
 
-      img {
-        width: 100%;
-        filter: grayscale(.4);
-      }
+        img {
+          width: 100%;
+          filter: grayscale(.4);
+        }
 
-      h3 {
-        position: absolute;
-        width: 100%;
-        color: #fff;
-        font-size: 14px;
-        background: #999;
-        opacity: .85;
-        padding: 2.5%;
-        z-index: 99;
-        text-align: center;
-      }
+        h3 {
+          position: absolute;
+          width: 100%;
+          color: #fff;
+          font-size: 14px;
+          background: #999;
+          opacity: .85;
+          padding: 2.5%;
+          z-index: 99;
+          text-align: center;
+        }
 
-      p {
-        background: #fff;
-        opacity: .9;
-        position: absolute;
-        z-index: 99;
-        text-align: center;
-        width: 50%;
-        bottom: 30%;
-        display: flex;
-        flex-direction: column;
-        padding: 5%;
+        p {
+          background: #fff;
+          opacity: .9;
+          position: absolute;
+          z-index: 99;
+          text-align: center;
+          width: 50%;
+          bottom: 30%;
+          display: flex;
+          flex-direction: column;
+          padding: 5%;
+          left: 25%;
+        }
       }
     }
   }
   
-  .cost-info {
-    grid-area: "other";
-
-  }
-
-  .request-info {
-    grid-area: "other";
+  .info {
+    grid-area: "info";
   }
 }
 

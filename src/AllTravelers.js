@@ -44,8 +44,9 @@ class AllTravelers {
       tripsDetails.date = trip.date;
       tripsDetails.lodgingCost = trip.duration * this.destinations.find(dest => dest.id === trip.destinationID).estimatedLodgingCostPerDay;
       tripsDetails.flightCost = trip.travelers * this.destinations.find(dest => dest.id === trip.destinationID).estimatedFlightCostPerPerson;
-      tripsDetails.total = tripsDetails.lodgingCost + tripsDetails.flightCost;
-      tripsDetails.fee = Math.round(tripsDetails.total * .10);
+      tripsDetails.subTotal = tripsDetails.lodgingCost + tripsDetails.flightCost;
+      tripsDetails.fee = Math.round(tripsDetails.subTotal * .10);
+      tripsDetails.total = tripsDetails.subTotal + tripsDetails.fee;
       return tripsDetails;
     });
   }
@@ -53,7 +54,7 @@ class AllTravelers {
   calculateTotalCost() {
     const allCosts = this.calculateTravelerCost();
     const currentYearCost = allCosts.filter(cost => moment(cost.date, 'YYYY/MM/DD').format('YYYY') === moment().format('YYYY'));
-    const costInfoOnly = _.map(currentYearCost, _.partialRight(_.pick, ['lodgingCost', 'flightCost', 'total', 'fee',]));
+    const costInfoOnly = _.map(currentYearCost, _.partialRight(_.pick, ['lodgingCost', 'flightCost', 'subTotal', 'fee','total']));
     return [_.mergeWith({}, ..._.map(costInfoOnly), _.add)];
   }
 

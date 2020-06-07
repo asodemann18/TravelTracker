@@ -31,26 +31,24 @@ const fetchData = () => {
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
       domUpdates.displayWelcome(traveler);
       domUpdates.displayTravelersTrips(traveler);
-
-      const tripDestinations= document.getElementById('trip-destinations')
       tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
-      const submitBtn = document.getElementById('submit-btn');
       submitBtn.addEventListener('click', function() {
         postTrip(allTravelers)
       });
-      // domUpdates.displayTravelerCosts(traveler);
+      domUpdates.displayTravelerCosts(traveler);
     })
     .catch(error => console.log(error.message));
 }
 
 const loginButton = document.getElementById('login-button')
-loginButton.addEventListener('click', domUpdates.submitLogin); 
+const tripDestinations= document.getElementById('trip-destinations')
+const submitBtn = document.getElementById('submit-btn');
 
-// const tripDestinations= document.getElementById('trip-destinations')
-// tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers)); 
+loginButton.addEventListener('click', domUpdates.submitLogin); 
 
 function postTrip(allTravelers) {
   const api = new ApiFetch();
+  const form = document.querySelector('.trip-form');
   const username = document.getElementById('username').value;  
   const destinationName = document.getElementById('trip-destinations').value;
   const destinationID = allTravelers.destinations.find(dest => dest.destination === destinationName).id;
@@ -67,10 +65,11 @@ function postTrip(allTravelers) {
     "status": "pending",
     "suggestedActivities": []
   }
-
   api.postTripRequest(tripDetails)
     .then(data => data)
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
+  form.reset();
+  // domUpdates.displayDestinationList(allTravelers);
 }
 
 fetchData();
