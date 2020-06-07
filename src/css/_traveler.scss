@@ -69,6 +69,42 @@
   
   .info {
     grid-area: "info";
+
+    .cost-info {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 5%;
+      margin: 10%;
+      font-family: Courier;
+
+      h3 {
+        text-align: center;
+        padding-bottom: 5%;
+      }
+
+      table {
+        text-align: center;
+
+        th {
+          padding-bottom: 3%;
+        }
+
+        td {
+          padding-bottom: 5%;
+        }
+      }
+    }
+
+    .request-info {
+      text-align: center;
+      background: white;
+      margin: 5% 10%;
+
+      .form-container {
+        padding: 1%;
+      }
+    }
   }
 }
 
