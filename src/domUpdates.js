@@ -33,7 +33,7 @@ const domUpdates = {
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   },
 
-  displayTravelersTrips(theTraveler, destinationData) {
+  displayTravelersTrips(theTraveler) {
     const tripInfoSection = document.querySelector('.trip-info');
     const tripDetails = theTraveler.getTrips().sort((a,b) => moment(b.date) - moment(a.date));
     const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
@@ -52,7 +52,7 @@ const domUpdates = {
                 <br>
                 Status: ${travelerData.status}
               </p>
-              <img src=${travelerData.image} alt=${travelerData.alt}>
+              <img src="${travelerData.image}" alt="${travelerData.alt}">
             </section>`;
   },
 

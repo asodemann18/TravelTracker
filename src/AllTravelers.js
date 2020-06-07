@@ -30,7 +30,7 @@ class AllTravelers {
         tripsDetails.travelers = trip.travelers;
         tripsDetails.destination = this.destinations.find(dest => dest.id === trip.destinationID).destination;        
         tripsDetails.image = this.destinations.find(dest => dest.id === trip.destinationID).image;
-        tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt;
+        tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt || tripsDetails.destination;
         tripsDetails.status = trip.status;
         return tripsDetails;
       })

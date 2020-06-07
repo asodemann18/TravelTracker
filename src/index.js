@@ -33,7 +33,7 @@ const fetchData = () => {
       domUpdates.displayTravelersTrips(traveler);
       tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
       submitBtn.addEventListener('click', function() {
-        postTrip(allTravelers)
+        postTrip(allTravelers, traveler);
       });
       domUpdates.displayTravelerCosts(traveler);
     })
@@ -46,7 +46,7 @@ const submitBtn = document.getElementById('submit-btn');
 
 loginButton.addEventListener('click', domUpdates.submitLogin); 
 
-function postTrip(allTravelers) {
+function postTrip(allTravelers, traveler) {
   const api = new ApiFetch();
   const form = document.querySelector('.trip-form');
   const username = document.getElementById('username').value;  
@@ -69,7 +69,7 @@ function postTrip(allTravelers) {
     .then(data => data)
     .catch(error => console.log(error));
   form.reset();
-  // domUpdates.displayDestinationList(allTravelers);
+  domUpdates.displayTravelersTrips(traveler);
 }
 
 fetchData();
