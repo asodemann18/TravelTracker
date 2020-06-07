@@ -76,7 +76,6 @@ const domUpdates = {
     const destinationNameId = document.getElementById('destination-name');
     const destinations = allData.destinations
     const destinationNames = destinations.map(dest => this.getDestinationListFormat(dest)).join(''); 
-    console.log(destinationNames);
     destinationNameId.innerHTML = destinationNames;
   },
 

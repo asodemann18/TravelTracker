@@ -3,6 +3,7 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
+import moment from 'moment'
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
@@ -30,9 +31,13 @@ const fetchData = () => {
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
       domUpdates.displayWelcome(traveler);
       domUpdates.displayTravelersTrips(traveler);
+
       const tripDestinations= document.getElementById('trip-destinations')
-      tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers)); 
-      
+      tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.addEventListener('click', function() {
+        postTrip(allTravelers)
+      });
       // domUpdates.displayTravelerCosts(traveler);
     })
     .catch(error => console.log(error.message));
@@ -40,10 +45,37 @@ const fetchData = () => {
 
 const loginButton = document.getElementById('login-button')
 loginButton.addEventListener('click', domUpdates.submitLogin); 
-fetchData();
 
 // const tripDestinations= document.getElementById('trip-destinations')
 // tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers)); 
+
+function postTrip(allTravelers) {
+  const api = new ApiFetch();
+  const username = document.getElementById('username').value;  
+  const destinationName = document.getElementById('trip-destinations').value;
+  const destinationID = allTravelers.destinations.find(dest => dest.destination === destinationName).id;
+  const numTravelers = Number(document.getElementById('trip-travelers').value);
+  const travelDate = moment(document.getElementById('trip-date').value).format('YYYY/MM/DD');
+  const duration = Number(document.getElementById('trip-duration').value);
+  const tripDetails = {
+    "id": allTravelers.trips.length + 1,
+    "userID": Number(username.split('traveler')[1]),
+    "destinationID": destinationID,
+    "travelers": numTravelers,
+    "date": travelDate,
+    "duration": duration,
+    "status": "pending",
+    "suggestedActivities": []
+  }
+
+  api.postTripRequest(tripDetails)
+    .then(data => data)
+    .catch(error => console.log(error))
+}
+
+fetchData();
+
+
 
 
 
