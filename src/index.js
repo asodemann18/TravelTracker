@@ -40,11 +40,11 @@ const fetchData = () => {
 
 const loginButton = document.getElementById('login-button')
 loginButton.addEventListener('click', domUpdates.submitLogin); 
+fetchData();
 
 // const tripDestinations= document.getElementById('trip-destinations')
 // tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers)); 
 
-fetchData();
 
 
 
