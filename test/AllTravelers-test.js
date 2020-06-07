@@ -42,8 +42,8 @@ describe('AllTravelers', function() {
 
   it('should show travelers who have a status of pending with a trip date in the future', () => {
     const pendingTravelers = [
-      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
-      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'}
+      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
+      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', image: destinationInfo[1].image, alt: destinationInfo[1].alt, status: 'pending'}
     ]
     expect(travelers.getTrips('pending')).to.deep.equal(pendingTravelers)
   })
@@ -51,24 +51,24 @@ describe('AllTravelers', function() {
 
   it('should show ALL travelers trip info when no argument is passed', () => {
     const allTravelersInfo = [
-      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
-      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'},
-      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', status: 'pending'},
-      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', status: 'approved'},
-      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', status: 'approved'},
-      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
+      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
+      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', image: destinationInfo[1].image, alt: destinationInfo[1].alt, status: 'pending'},
+      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', image: destinationInfo[2].image, alt: destinationInfo[2].alt, status: 'pending'},
+      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', image: destinationInfo[3].image, alt: destinationInfo[3].alt, status: 'approved'},
+      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', image: destinationInfo[4].image, alt: destinationInfo[4].alt, status: 'approved'},
+      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', image: destinationInfo[0].image, alt: destinationInfo[0].alt, status: 'approved'}
     ]
     expect(travelers.getTrips()).to.deep.equal(allTravelersInfo)
   })
 
   it('should show ALL travelers trip info when argument passed is not "pending', () => {
     const allTravelersInfo = [
-      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
-      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'},
-      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', status: 'pending'},
-      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', status: 'approved'},
-      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', status: 'approved'},
-      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
+      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
+      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', image: destinationInfo[1].image, alt: destinationInfo[1].alt, status: 'pending'},
+      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', image: destinationInfo[2].image, alt: destinationInfo[2].alt, status: 'pending'},
+      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', image: destinationInfo[3].image, alt: destinationInfo[3].alt, status: 'approved'},
+      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', image: destinationInfo[4].image, alt: destinationInfo[4].alt, status: 'approved'},
+      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', image: destinationInfo[0].image, alt: destinationInfo[0].alt, status: 'approved'}
     ]
     expect(travelers.getTrips('xyz')).to.deep.equal(allTravelersInfo)
   })

@@ -27,7 +27,7 @@ const domUpdates = {
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   },
 
-  displayTravelersTrips(theTraveler) {
+  displayTravelersTrips(theTraveler, destinationData) {
     const tripInfoSection = document.querySelector('.trip-info');
     const tripDetails = theTraveler.getTrips().sort((a,b) => moment(b.date) - moment(a.date));
     const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
@@ -35,19 +35,19 @@ const domUpdates = {
     tripInfoSection.innerHTML = formattedTripDetails;
   },
 
-  getTripFormat(data) {
+  getTripFormat(travelerData) {
     return `<section class="image-container">
-              <h3>${data.destination}</h3>
+              <h3>${travelerData.destination.toUpperCase()}</h3>
               <p>
-                Date: ${data.date}
+                Date: ${travelerData.date}
                 <br>
-                Duration: ${data.duration}
+                Duration: ${travelerData.duration}
                 <br>
-                Travelers: ${data.travelers}
+                Travelers: ${travelerData.travelers}
                 <br>
-                Status: ${data.status}
+                Status: ${travelerData.status}
               </p>
-              <img src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80">
+              <img src=${travelerData.image} alt=${travelerData.alt}>
             </section>`;
   },
 

@@ -16,6 +16,8 @@ class AllTravelers {
         tripsDetails.duration = trip.duration;
         tripsDetails.travelers = trip.travelers;
         tripsDetails.destination = this.destinations.find(dest => dest.id === trip.destinationID).destination;
+        tripsDetails.image = this.destinations.find(dest => dest.id === trip.destinationID).image;
+        tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt;
         tripsDetails.status = trip.status;
         return tripsDetails;
       })
@@ -27,6 +29,8 @@ class AllTravelers {
         tripsDetails.duration = trip.duration;
         tripsDetails.travelers = trip.travelers;
         tripsDetails.destination = this.destinations.find(dest => dest.id === trip.destinationID).destination;        
+        tripsDetails.image = this.destinations.find(dest => dest.id === trip.destinationID).image;
+        tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt;
         tripsDetails.status = trip.status;
         return tripsDetails;
       })
