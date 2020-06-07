@@ -19,9 +19,48 @@
         <h1 class="welcome">Welcome Traveler!</h1>
       </header>
       <section class="trip-info"></section>
-      <section class="cost-info"></section>
-      <section class="request-info"></section>
-
+      <section class="request-info">
+        <form class="trip-form "method="post">
+          <h4>Request A New Trip Here:</h4>
+          <section class="form-container">
+          <label for="trip-date">Trip Date:</label>
+          <input id="trip-date" type="date" name="trip-date" value=""></input>
+          </section>
+          <section class="form-container">
+          <label for="trip-duration">Duration:</label>
+          <input id="trip-duration" type="number" name="trip-duration" min="0"></input>
+          </section>
+          <section class="form-container">
+            <label for="trip-travelers">Travelers:</label>
+            <input id="trip-travelers" type="number" name="trip-travelers" min="1"></input>
+          </section>
+          <section class="form-container">
+            <label for="trip-destinations">Destination:</label>
+            <input id="trip-destinations" type="text" name="trip-destinations" list="destination-name">
+              <datalist id="destination-name">
+                <option value="Boston">
+                <option value="Cambridge">
+              </datalist>
+            </input>
+          </section>
+          <section class="form-container">
+          <button class="submit-btn" type="button" name="submit">Submit</button>
+          </section>
+        </form>
+      </section>
+      <section class="cost-info">
+        <section>
+          <p>
+            Lodging: money
+            <br>
+            Flight: money
+            <br>
+            Total: money
+            <br>
+            Fee: money
+          </p>
+        </section>
+      </section>
     </section>
     <section class="agent hidden">
       <h1>Welcome Agent!</h1>

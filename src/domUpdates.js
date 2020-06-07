@@ -31,17 +31,24 @@ const domUpdates = {
     const tripInfoSection = document.querySelector('.trip-info');
     const tripDetails = theTraveler.getTrips().sort((a,b) => moment(b.date) - moment(a.date));
     const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
+    console.log(formattedTripDetails)
     tripInfoSection.innerHTML = formattedTripDetails;
   },
 
   getTripFormat(data) {
-    return `<ul>
-              <li>Destination: ${data.destination}</li>
-              <li>Date: ${data.date}</li>
-              <li>Duration: ${data.duration}</li>
-              <li>Travelers: ${data.travelers}</li>
-              <li>Status: ${data.status}</li>
-            </ul>`;
+    return `<section class="image-container">
+              <h3>${data.destination}</h3>
+              <p>
+                Date: ${data.date}
+                <br>
+                Duration: ${data.duration}
+                <br>
+                Travelers: ${data.travelers}
+                <br>
+                Status: ${data.status}
+              </p>
+              <img src="https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80">
+            </section>`;
   },
 
   displayTravelerCosts(theTraveler) {

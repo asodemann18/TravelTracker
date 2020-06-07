@@ -3,6 +3,16 @@
 @import 'login';
 @import 'traveler';
 
+*,
+*:after,
+*:before {
+  border: solid 1px grey;
+  box-sizing: border-box;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: $primary-background;
   font-family: Arial;

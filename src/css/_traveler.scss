@@ -1,13 +1,14 @@
 .traveler {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   grid-template-areas:
-    "trips cost form";
-
+    "header header "
+    "trips other";
 
   header {
     @include flexin(row);
+    grid-area: header;
     height: 15vh;
     justify-content: center;
     align-items: center;
@@ -15,23 +16,58 @@
 
   .trip-info {
     grid-area: "trips";
-    border: black 5px solid;
-    width: 25%;
-    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+    margin-top: 5%;
+
+    .image-container {
+      width: 75%;
+      position: relative;
+      margin-top: 5%;
+      height: 50%;
+
+      img {
+        width: 100%;
+        filter: grayscale(.4);
+      }
+
+      h3 {
+        position: absolute;
+        width: 100%;
+        color: #fff;
+        font-size: 14px;
+        background: #999;
+        opacity: .85;
+        padding: 2.5%;
+        z-index: 99;
+        text-align: center;
+      }
+
+      p {
+        background: #fff;
+        opacity: .9;
+        position: absolute;
+        z-index: 99;
+        text-align: center;
+        width: 50%;
+        bottom: 30%;
+        display: flex;
+        flex-direction: column;
+        padding: 5%;
+      }
+    }
   }
   
   .cost-info {
-    grid-area: "cost";
-    border: black 5px solid;
-    width: 25%;
-    height: 80vh;
+    grid-area: "other";
+
   }
 
   .request-info {
-    grid-area: "form";
-    border: black 5px solid;
-    width: 25%;
-    height: 80vh;
+    grid-area: "other";
   }
 }
 
