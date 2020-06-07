@@ -30,6 +30,8 @@ const fetchData = () => {
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
       domUpdates.displayWelcome(traveler);
       domUpdates.displayTravelersTrips(traveler);
+      const tripDestinations= document.getElementById('trip-destinations')
+      tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers)); 
       
       // domUpdates.displayTravelerCosts(traveler);
     })
@@ -37,9 +39,13 @@ const fetchData = () => {
 }
 
 const loginButton = document.getElementById('login-button')
-loginButton.addEventListener('click', domUpdates.submitLogin);   
+loginButton.addEventListener('click', domUpdates.submitLogin); 
+
+// const tripDestinations= document.getElementById('trip-destinations')
+// tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers)); 
 
 fetchData();
+
 
 
 

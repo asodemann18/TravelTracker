@@ -8,19 +8,25 @@ const domUpdates = {
     const traveler = document.querySelector('.traveler');
     const agency = document.querySelector('.agent');
     if (username === 'agency' && password === 'travel2020') {
-      agency.classList.remove('hidden')
-      login.classList.add('hidden')
-      return 'agent' 
+      agency.classList.remove('hidden');
+      login.classList.add('hidden');
+      return 'agent' ;
     } else if (username.includes('traveler') && 
               (username.split('traveler')[1] < 51 && username.split("traveler")[1] > 0) &&
                password === 'travel2020') {
-      traveler.classList.remove('hidden')
-      login.classList.add('hidden')
-      return username
+      traveler.classList.remove('hidden');
+      login.classList.add('hidden');
+      return username;
     } else {
       alert('Incorrect username or password');
     }
   },
+
+  // getId() {
+  //   const username = document.getElementById('username').value;
+  //   console.log('getId', username.split('traveler')[1]);
+  //   return username.split('traveler')[1]
+  // },
 
   displayWelcome(theTraveler) {
     const welcome = document.querySelector('.welcome');
@@ -31,7 +37,6 @@ const domUpdates = {
     const tripInfoSection = document.querySelector('.trip-info');
     const tripDetails = theTraveler.getTrips().sort((a,b) => moment(b.date) - moment(a.date));
     const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
-    console.log(formattedTripDetails)
     tripInfoSection.innerHTML = formattedTripDetails;
   },
 
@@ -65,6 +70,19 @@ const domUpdates = {
               <li>Total: $${data.total}</li>
               <li>Fee: $${data.fee}</li>
             </ul>`;
+  },
+
+  displayDestinationList(allData) {
+    const destinationNameId = document.getElementById('destination-name');
+    const destinations = allData.destinations
+    const destinationNames = destinations.map(dest => this.getDestinationListFormat(dest)).join('');
+    // const formattedDestinationNames = 
+    console.log(destinationNames);
+    destinationNameId.innerHTML = destinationNames;
+  },
+
+  getDestinationListFormat(data) {
+    return `<option value="${data.destination}">`
   }
 }
 
