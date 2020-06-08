@@ -29,14 +29,19 @@ const fetchData = () => {
     }).then(dataSet => {
       allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
-      domUpdates.displayWelcome(traveler);
-      domUpdates.displayTravelersTrips(traveler);
-      tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
-      submitBtn.addEventListener('click', function() {
-        // domUpdates.displayNewTripCost(traveler);
-        postTrip(allTravelers, traveler);
-      });
-      domUpdates.displayTravelerCosts(traveler);
+      travelerPage(traveler, allTravelers);
+      agentPage(allTravelers);
+      // agentPage(allTravelers);
+      // domUpdates.displayWelcome(traveler);
+      // domUpdates.displayTravelersTrips(traveler);
+      // tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
+      // submitBtn.addEventListener('click', function() {
+      //   // domUpdates.displayNewTripCost(traveler);
+      //   postTrip(allTravelers, traveler);
+      // });
+      // domUpdates.displayTravelerCosts(traveler);
+
+      // domUpdates.displayTravelersTrips(allTravelers, 'pending');
     })
     .catch(error => console.log(error.message));
 }
@@ -46,6 +51,34 @@ const tripDestinations= document.getElementById('trip-destinations')
 const submitBtn = document.getElementById('submit-btn');
 
 loginButton.addEventListener('click', domUpdates.submitLogin); 
+
+function travelerPage(traveler, allTravelers) {
+  const travelerDisplay = document.querySelector('.traveler');
+  if (travelerDisplay) {
+    domUpdates.displayWelcome(traveler);
+    domUpdates.displayTravelersTrips(traveler);
+    tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
+    submitBtn.addEventListener('click', function() {
+      // domUpdates.displayNewTripCost(traveler);
+      postTrip(allTravelers, traveler);
+    });
+    domUpdates.displayTravelerCosts(traveler)
+  } 
+}
+
+function agentPage(allTravelers) {
+  const agentDisplay = document.querySelector('.agent');
+  if (agentDisplay) {
+    domUpdates.displayAllTravelersTrips(allTravelers);
+    // tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
+    // submitBtn.addEventListener('click', function() {
+    //   // domUpdates.displayNewTripCost(traveler);
+    //   postTrip(allTravelers, traveler);
+    // });
+    // domUpdates.displayTravelerCosts(allTravelers)
+  } 
+  
+}
 
 function postTrip(allTravelers, traveler) {
   const api = new ApiFetch();

@@ -33,13 +33,25 @@ const domUpdates = {
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   },
 
-  displayTravelersTrips(theTraveler, theStatus) {
+  displayTravelersTrips(theTraveler) {
     const tripInfoSection = document.querySelector('.trip-info');
-    const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
-    const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
+    const formattedTripDetails = this.getTripInfo(theTraveler);
     tripInfoSection.innerHTML = formattedTripDetails;    
   },
+  
+  displayAllTravelersTrips(allTravelers) {
+    const agentInfoSection = document.querySelector('.agent-info')
+    const formattedTripDetails = this.getTripInfo(allTravelers, 'pending');
+    agentInfoSection.innerHTML = formattedTripDetails;  
+  },
 
+  getTripInfo(theTraveler, theStatus) {
+    const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
+    const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
+    return formattedTripDetails
+  },
+
+  
   getTripFormat(travelerData) {
     return `<section class="image-container">
               <h3>${travelerData.destination.toUpperCase()}</h3>

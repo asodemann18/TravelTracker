@@ -3,7 +3,18 @@ $border: solid 2px black;
 $border-radius: 15px;
 $secondary-background: white;
 
+
 @mixin flexin($direction) {
   display: flex;
   flex-direction: $direction;
+}
+
+@mixin heading() {
+  header {
+    @include flexin(row);
+    grid-area: header;
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+  }
 }
