@@ -51,7 +51,7 @@ function postTrip(allTravelers, traveler) {
   const api = new ApiFetch();
   const form = document.querySelector('.trip-form');
   const username = document.getElementById('username').value;  
-  const destinationName = document.getElementById('trip-destinations').value;
+  let destinationName = document.getElementById('trip-destinations').value;
   const destinationID = allTravelers.destinations.find(dest => dest.destination === destinationName).id;
   const numTravelers = Number(document.getElementById('trip-travelers').value);
   const travelDate = moment(document.getElementById('trip-date').value).format('YYYY/MM/DD');
@@ -68,10 +68,10 @@ function postTrip(allTravelers, traveler) {
   }
   api.postTripRequest(tripDetails)
     .then(data => traveler.trips.push(data.newResource))
+    .then(() => console.log(traveler.trips))
     .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
-    // .then(() => form.reset())
+    .then(() => form.reset())
     .catch(error => console.log(error));
-  // form.reset();
 }
 
 fetchData();

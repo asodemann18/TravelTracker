@@ -23,13 +23,13 @@ body {
 }
 
 .overlay {
-  filter:alpha(opacity=50);
-  background-color: white;
+  // filter:alpha(opacity=50);
   height:100%;
-  left:0;
+  // left:0;
   opacity:0.5;
-  position:fixed;
+  position: absolute;
   top:0;
+  // right: 0;
   width:100%;
-  z-index:100;
+  // z-index:100;
 }

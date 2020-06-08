@@ -70,13 +70,20 @@
   .info {
     grid-area: "info";
 
-    .cost-info, .estimated-cost {
+    .cost-info {
       background-color: $secondary-background;
       @include flexin(column);
       padding-bottom: 0;
       margin: 10%;
       font-family: Courier;
       border-radius: $border-radius;
+      
+      // #estimated-cost {
+      //   position: absolute;
+      //   top: 50%;
+      //   bottom: 50%;
+      //   opacity: 1;
+      // }
 
       h3 {
         text-align: center;
@@ -125,5 +132,39 @@
   }
 }
 
+.estimated-cost {
+  background-color: $secondary-background;
+  @include flexin(column);
+  padding-bottom: 0;
+  margin: 10%;
+  font-family: Courier;
+  border-radius: $border-radius;
+  position: absolute;
+  top: 0%;
+  
+
+  h3 {
+    text-align: center;
+    font-family: Arial;
+  }
+
+  table {
+    text-align: center;
+    table-layout: fixed;
+
+    th {
+      padding-bottom: 3%;
+    }
+
+    td {
+      padding-bottom: 5%;
+      width: 50%;
+    }
+
+    .total-border {
+      border-bottom: 2px dashed black;
+    }
+  }
+}
 
 

@@ -33,11 +33,11 @@ const domUpdates = {
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   },
 
-  displayTravelersTrips(theTraveler, status) {
+  displayTravelersTrips(theTraveler, theStatus) {
     const tripInfoSection = document.querySelector('.trip-info');
-    const tripDetails = theTraveler.getTrips(status).sort((a,b) => moment(b.date) - moment(a.date));
+    const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
     const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
-    tripInfoSection.innerHTML = formattedTripDetails;
+    tripInfoSection.innerHTML = formattedTripDetails;    
   },
 
   getTripFormat(travelerData) {
@@ -79,7 +79,7 @@ const domUpdates = {
     costDetails.total = costDetails.subTotal + costDetails.fee;
     const formattedCostDetails = this.getCostFormat('Estimated Cost', costDetails)
     estimatedCost.classList.remove('hidden')
-    travelerPage.insertAdjacentHTML('beforebegin', '<section class="overlay"></section>');
+    travelerPage.classList.add('overlay');
     estimatedCost.innerHTML = formattedCostDetails;
   },
 

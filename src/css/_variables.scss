@@ -1,9 +1,7 @@
 $primary-background: #A4D3EE;
 $border: solid 2px black;
 $border-radius: 15px;
-$secondary-background: white
-
-
+$secondary-background: white;
 
 @mixin flexin($direction) {
   display: flex;
