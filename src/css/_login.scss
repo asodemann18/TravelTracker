@@ -1,10 +1,10 @@
 .login-container {
   @include flexin(column);
   align-items: center;
-  background-color: white;
+  background-color: $secondary-background;
   position: fixed;
   padding: 5%;
-  border-radius: 15px;
+  border-radius: $border-radius;
   margin-left: 32%;
   margin-top: 13%;
   box-shadow: 10px 5px 5px #333;

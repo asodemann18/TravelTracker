@@ -21,8 +21,7 @@
   
     .trip-info {
       grid-area: "trips";
-      display: flex;
-      flex-direction: column;
+      @include flexin(column);
       justify-content: center;
       align-items: center;
       overflow: scroll;
@@ -36,13 +35,13 @@
         img {
           width: 100%;
           filter: grayscale(.4);
-          border-radius: 15px;
+          border-radius: $border-radius;
         }
 
         h3 {
           position: absolute;
           width: 96%;
-          color: #fff;
+          color: $secondary-background;
           font-size: 14px;
           background: #999;
           opacity: .85;
@@ -52,18 +51,17 @@
         }
 
         p {
-          background: #fff;
+          background: $secondary-background;
           opacity: .9;
           position: absolute;
           z-index: 99;
           text-align: center;
           width: 50%;
           bottom: 30%;
-          display: flex;
-          flex-direction: column;
+          @include flexin(column);
           padding: 5%;
           left: 25%;
-          border-radius: 15px;
+          border-radius: $border-radius;
         }
       }
     }
@@ -73,13 +71,12 @@
     grid-area: "info";
 
     .cost-info, .estimated-cost {
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
+      background-color: $secondary-background;
+      @include flexin(column);
       padding-bottom: 0;
       margin: 10%;
       font-family: Courier;
-      border-radius: 15px;
+      border-radius: $border-radius;
 
       h3 {
         text-align: center;
@@ -107,10 +104,10 @@
 
     .request-info {
       text-align: center;
-      background: white;
+      background: $secondary-background;
       margin: 0% 10%;
       margin-bottom: -7%;
-      border-radius: 15px;
+      border-radius: $border-radius;
 
       .form-container {
         padding: 1%;
