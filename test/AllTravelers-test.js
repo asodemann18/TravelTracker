@@ -42,8 +42,8 @@ describe('AllTravelers', function() {
 
   it('should show travelers who have a status of pending with a trip date in the future', () => {
     const pendingTravelers = [
-      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
-      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'}
+      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
+      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', image: destinationInfo[1].image, alt: destinationInfo[1].alt, status: 'pending'}
     ]
     expect(travelers.getTrips('pending')).to.deep.equal(pendingTravelers)
   })
@@ -51,24 +51,24 @@ describe('AllTravelers', function() {
 
   it('should show ALL travelers trip info when no argument is passed', () => {
     const allTravelersInfo = [
-      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
-      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'},
-      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', status: 'pending'},
-      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', status: 'approved'},
-      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', status: 'approved'},
-      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
+      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
+      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', image: destinationInfo[1].image, alt: destinationInfo[1].alt, status: 'pending'},
+      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', image: destinationInfo[2].image, alt: destinationInfo[2].alt, status: 'pending'},
+      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', image: destinationInfo[3].image, alt: destinationInfo[3].alt, status: 'approved'},
+      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', image: destinationInfo[4].image, alt: destinationInfo[4].alt, status: 'approved'},
+      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', image: destinationInfo[0].image, alt: destinationInfo[0].alt, status: 'approved'}
     ]
     expect(travelers.getTrips()).to.deep.equal(allTravelersInfo)
   })
 
   it('should show ALL travelers trip info when argument passed is not "pending', () => {
     const allTravelersInfo = [
-      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', status: 'pending'},
-      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', status: 'pending'},
-      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', status: 'pending'},
-      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', status: 'approved'},
-      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', status: 'approved'},
-      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', status: 'approved'}
+      {name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
+      {name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', image: destinationInfo[1].image, alt: destinationInfo[1].alt, status: 'pending'},
+      {name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', image: destinationInfo[2].image, alt: destinationInfo[2].alt, status: 'pending'},
+      {name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', image: destinationInfo[3].image, alt: destinationInfo[3].alt, status: 'approved'},
+      {name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', image: destinationInfo[4].image, alt: destinationInfo[4].alt, status: 'approved'},
+      {name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', image: destinationInfo[0].image, alt: destinationInfo[0].alt, status: 'approved'}
     ]
     expect(travelers.getTrips('xyz')).to.deep.equal(allTravelersInfo)
   })
@@ -80,31 +80,34 @@ describe('AllTravelers', function() {
         date: '2020/02/25',
         lodgingCost: 650,
         flightCost: 700,
-        total: 1350,
-        fee: 135
+        subTotal: 1350,
+        fee: 135, 
+        total: 1485
       },
       {
         userID: 5,
         date: '2020/04/30',
         lodgingCost: 2700,
         flightCost: 1950,
-        total: 4650,
-        fee: 465
+        subTotal: 4650,
+        fee: 465,
+        total: 5115
       }
     ]
-    expect(travelers.calculateIndividualCost()).to.deep.equal(individualTravelCosts)
+    expect(travelers.calculateTravelerCost()).to.deep.equal(individualTravelCosts)
    })
 
    it('should calculate cost of each trip for each traveler even when an argument is passed', () => {
-    expect(travelers.calculateIndividualCost('test').length).to.equal(2);
+    expect(travelers.calculateTravelerCost('test').length).to.equal(2);
    })
 
   it('should calculate costs/revenue for the current year', () => {
     const travelCosts = [{
       lodgingCost: 3350,
       flightCost: 2650,
-      total: 6000,
-      fee: 600
+      subTotal: 6000,
+      fee: 600,
+      total: 6600
     }]
     expect(travelers.calculateTotalCost()).to.deep.equal(travelCosts)
    })
@@ -113,8 +116,9 @@ describe('AllTravelers', function() {
     const travelCosts = [{
       lodgingCost: 3350,
       flightCost: 2650,
-      total: 6000,
-      fee: 600
+      subTotal: 6000,
+      fee: 600,
+      total: 6600
     }]
     expect(travelers.calculateTotalCost(123)).to.deep.equal(travelCosts)
    })

@@ -1,6 +1,17 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import 'variables';  
 @import 'login';
+@import 'traveler';
+
+// *,
+// *:after,
+// *:before {
+//   border: solid 1px grey;
+//   box-sizing: border-box;
+//   color: black;
+//   margin: 0;
+//   padding: 0;
+// }
 
 body {
   background: $primary-background;
@@ -9,4 +20,16 @@ body {
 
 .hidden {
   display: none;
+}
+
+.overlay {
+  // filter:alpha(opacity=50);
+  height:100%;
+  // left:0;
+  opacity:0.5;
+  position: absolute;
+  top:0;
+  // right: 0;
+  width:100%;
+  // z-index:100;
 }

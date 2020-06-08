@@ -1,0 +1,170 @@
+.traveler {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 15% 85%;
+  grid-template-areas:
+    "header header "
+    "trips info";
+  
+
+  header {
+    @include flexin(row);
+    grid-area: header;
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .trip-section {
+    height: 80vh;
+    overflow: scroll;
+  
+    .trip-info {
+      grid-area: "trips";
+      @include flexin(column);
+      justify-content: center;
+      align-items: center;
+      overflow: scroll;
+
+      .image-container {
+        width: 75%;
+        position: relative;
+        margin-bottom: 2.5%;
+        height: 50%;
+
+        img {
+          width: 100%;
+          filter: grayscale(.4);
+          border-radius: $border-radius;
+        }
+
+        h3 {
+          position: absolute;
+          width: 96%;
+          color: $secondary-background;
+          font-size: 14px;
+          background: #999;
+          opacity: .85;
+          padding: 2%;
+          z-index: 99;
+          text-align: center;
+        }
+
+        p {
+          background: $secondary-background;
+          opacity: .9;
+          position: absolute;
+          z-index: 99;
+          text-align: center;
+          width: 50%;
+          bottom: 30%;
+          @include flexin(column);
+          padding: 5%;
+          left: 25%;
+          border-radius: $border-radius;
+        }
+      }
+    }
+  }
+  
+  .info {
+    grid-area: "info";
+
+    .cost-info {
+      background-color: $secondary-background;
+      @include flexin(column);
+      padding-bottom: 0;
+      margin: 10%;
+      font-family: Courier;
+      border-radius: $border-radius;
+      
+      // #estimated-cost {
+      //   position: absolute;
+      //   top: 50%;
+      //   bottom: 50%;
+      //   opacity: 1;
+      // }
+
+      h3 {
+        text-align: center;
+        font-family: Arial;
+      }
+
+      table {
+        text-align: center;
+        table-layout: fixed;
+
+        th {
+          padding-bottom: 3%;
+        }
+
+        td {
+          padding-bottom: 5%;
+          width: 50%;
+        }
+
+        .total-border {
+          border-bottom: 2px dashed black;
+        }
+      }
+    }
+
+    .request-info {
+      text-align: center;
+      background: $secondary-background;
+      margin: 0% 10%;
+      margin-bottom: -7%;
+      border-radius: $border-radius;
+
+      .form-container {
+        padding: 1%;
+      }
+
+      h3 {
+        padding-top: 3%;
+        margin-top: 0;
+      }
+
+      #button {
+        padding-bottom: 3%;
+      }
+    }
+  }
+}
+
+.estimated-cost {
+  background-color: $secondary-background;
+  @include flexin(column);
+  padding-bottom: 0;
+  margin: 10%;
+  font-family: Courier;
+  border-radius: $border-radius;
+  position: absolute;
+  top: 0%;
+  
+
+  h3 {
+    text-align: center;
+    font-family: Arial;
+  }
+
+  table {
+    text-align: center;
+    table-layout: fixed;
+
+    th {
+      padding-bottom: 3%;
+    }
+
+    td {
+      padding-bottom: 5%;
+      width: 50%;
+    }
+
+    .total-border {
+      border-bottom: 2px dashed black;
+    }
+  }
+}
+
+

@@ -17,6 +17,19 @@ class ApiFetch {
     let url = `${this.rootUrl}/destinations/destinations`
     return fetch(url).then(response => response.json())
   }
+
+  postTripRequest(tripDetails) {
+    let url = `${this.rootUrl}/trips/trips`;
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tripDetails),
+    })
+      .then(response => response.json())
+      .catch(err => console.log(err.message));
+  }
 }
 
 export default ApiFetch;
