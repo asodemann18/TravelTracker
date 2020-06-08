@@ -33,9 +33,9 @@ const domUpdates = {
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   },
 
-  displayTravelersTrips(theTraveler) {
+  displayTravelersTrips(theTraveler, status) {
     const tripInfoSection = document.querySelector('.trip-info');
-    const tripDetails = theTraveler.getTrips().sort((a,b) => moment(b.date) - moment(a.date));
+    const tripDetails = theTraveler.getTrips(status).sort((a,b) => moment(b.date) - moment(a.date));
     const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
     tripInfoSection.innerHTML = formattedTripDetails;
   },
@@ -59,12 +59,32 @@ const domUpdates = {
   displayTravelerCosts(theTraveler) {
     const costInfoSection = document.querySelector('.cost-info')
     const costDetails = theTraveler.calculateTotalCost();
-    const formattedCostDetails = costDetails.map(detail => this.getCostFormat(detail)).join('');
+    const formattedCostDetails = costDetails.map(detail => this.getCostFormat('Total Spent YTD', detail)).join('');
     costInfoSection.innerHTML = formattedCostDetails;
   },
 
-  getCostFormat(data) {
-    return `<h3>Total Spent YTD</h3>
+  displayNewTripCost(theTraveler) {
+    const travelerPage = document.querySelector('.traveler');
+    const estimatedCost = document.querySelector('.estimated-cost');
+    const destinationName = document.getElementById('trip-destinations').value;
+    const lodgingCost = theTraveler.destinations.find(dest => dest.destination === destinationName).estimatedLodgingCostPerDay
+    const flightCost = theTraveler.destinations.find(dest => dest.destination === destinationName).estimatedFlightCostPerPerson
+    const numTravelers = Number(document.getElementById('trip-travelers').value);
+    const duration = Number(document.getElementById('trip-duration').value);
+    const costDetails = {}
+    costDetails.lodgingCost = lodgingCost * duration;
+    costDetails.flightCost = flightCost * numTravelers;
+    costDetails.subTotal = costDetails.lodgingCost + costDetails.flightCost;
+    costDetails.fee = Math.round(costDetails.subTotal * .10);
+    costDetails.total = costDetails.subTotal + costDetails.fee;
+    const formattedCostDetails = this.getCostFormat('Estimated Cost', costDetails)
+    estimatedCost.classList.remove('hidden')
+    travelerPage.insertAdjacentHTML('beforebegin', '<section class="overlay"></section>');
+    estimatedCost.innerHTML = formattedCostDetails;
+  },
+
+  getCostFormat(title, data) {
+    return `<h3>${title}</h3>
             <table>
               <thead>
                 <tr>
@@ -78,8 +98,8 @@ const domUpdates = {
                   <td>$${data.lodgingCost}</td>
                 </tr>
                 <tr>
-                  <td>Flight:</td>
-                  <td>$${data.flightCost}</td>
+                  <td class="total-border">Flight:</td>
+                  <td class="total-border">$${data.flightCost}</td>
                 </tr>
                 <tr>
                   <td>Sub Total:</td>
@@ -90,8 +110,8 @@ const domUpdates = {
                   <td>$${data.fee}</td>
                 </tr>
                 <tr>
-                  <td>Total:</td>
-                  <td>$${data.total}</td>
+                  <td><b>Total:</b></td>
+                  <td><b>$${data.total}</b></td>
                 </tr>
               </tbody>
             </table>`;

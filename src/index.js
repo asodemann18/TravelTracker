@@ -33,6 +33,7 @@ const fetchData = () => {
       domUpdates.displayTravelersTrips(traveler);
       tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
       submitBtn.addEventListener('click', function() {
+        // domUpdates.displayNewTripCost(traveler);
         postTrip(allTravelers, traveler);
       });
       domUpdates.displayTravelerCosts(traveler);
@@ -56,7 +57,7 @@ function postTrip(allTravelers, traveler) {
   const travelDate = moment(document.getElementById('trip-date').value).format('YYYY/MM/DD');
   const duration = Number(document.getElementById('trip-duration').value);
   const tripDetails = {
-    "id": allTravelers.trips.length + 1,
+    "id": Date.now(),
     "userID": Number(username.split('traveler')[1]),
     "destinationID": destinationID,
     "travelers": numTravelers,
@@ -66,10 +67,11 @@ function postTrip(allTravelers, traveler) {
     "suggestedActivities": []
   }
   api.postTripRequest(tripDetails)
-    .then(data => data)
+    .then(data => traveler.trips.push(data.newResource))
+    .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
+    // .then(() => form.reset())
     .catch(error => console.log(error));
-  form.reset();
-  domUpdates.displayTravelersTrips(traveler);
+  // form.reset();
 }
 
 fetchData();

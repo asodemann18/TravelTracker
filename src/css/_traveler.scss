@@ -30,22 +30,23 @@
       .image-container {
         width: 75%;
         position: relative;
-        margin-top: 5%;
+        margin-bottom: 2.5%;
         height: 50%;
 
         img {
           width: 100%;
           filter: grayscale(.4);
+          border-radius: 15px;
         }
 
         h3 {
           position: absolute;
-          width: 100%;
+          width: 96%;
           color: #fff;
           font-size: 14px;
           background: #999;
           opacity: .85;
-          padding: 2.5%;
+          padding: 2%;
           z-index: 99;
           text-align: center;
         }
@@ -62,6 +63,7 @@
           flex-direction: column;
           padding: 5%;
           left: 25%;
+          border-radius: 15px;
         }
       }
     }
@@ -70,21 +72,23 @@
   .info {
     grid-area: "info";
 
-    .cost-info {
+    .cost-info, .estimated-cost {
       background-color: #fff;
       display: flex;
       flex-direction: column;
-      padding: 5%;
+      padding-bottom: 0;
       margin: 10%;
       font-family: Courier;
+      border-radius: 15px;
 
       h3 {
         text-align: center;
-        padding-bottom: 5%;
+        font-family: Arial;
       }
 
       table {
         text-align: center;
+        table-layout: fixed;
 
         th {
           padding-bottom: 3%;
@@ -92,6 +96,11 @@
 
         td {
           padding-bottom: 5%;
+          width: 50%;
+        }
+
+        .total-border {
+          border-bottom: 2px dashed black;
         }
       }
     }
@@ -99,10 +108,21 @@
     .request-info {
       text-align: center;
       background: white;
-      margin: 5% 10%;
+      margin: 0% 10%;
+      margin-bottom: -7%;
+      border-radius: 15px;
 
       .form-container {
         padding: 1%;
+      }
+
+      h3 {
+        padding-top: 3%;
+        margin-top: 0;
+      }
+
+      #button {
+        padding-bottom: 3%;
       }
     }
   }
