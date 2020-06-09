@@ -1,0 +1,108 @@
+.agent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 15% 75% 10%;
+  grid-template-areas:
+    "header header "
+    "trips info";
+  
+
+  @include heading();
+
+  .agent-section {
+    @include tripsSection;
+  
+    .agent-info {
+      @include tripGrid();
+
+      .image-container {
+        @include imageContainerFormat();
+
+        img {
+          @include imgFormat();
+        }
+
+        h3 {
+          @include pictureHeading();
+        }
+
+        p {
+          @include pictureInfo(12%, 20%);
+          padding-bottom: 2%;
+        }
+
+        button {
+          background-color: $primary-background;
+          border-radius: $border-radius;
+          margin-top: 2%;
+        }
+      }
+    }
+  }
+  
+  .other-info {
+    grid-area: "info";
+
+    .revenue {
+      text-align: center;
+      background: $secondary-background;
+      margin: 0% 10%;
+      margin-bottom: -7%;
+      border-radius: $border-radius;
+
+      h3 {
+        padding-top: 3%;
+        margin-top: 0;
+      }
+
+      .revenue-details {
+        padding-bottom: 3%;
+        padding-top: 0;
+      }
+    }
+
+    .today-travelers {
+      background-color: $secondary-background;
+      @include flexin(column);
+      padding-bottom: 0;
+      margin: 10%;
+      border-radius: $border-radius;
+      max-height: 55%;
+      overflow: scroll;
+
+        h3 {
+          text-align: center;
+        }
+
+        table {
+          text-align: center;
+          table-layout: fixed;
+          margin: auto;
+          padding-bottom: 2%;
+
+          th {
+            padding-bottom: 3%;
+          }
+
+          td {
+            padding-bottom: 5%;
+            width: 30%;
+          }
+        }
+    }
+
+    .search {
+      @include flexin(row);
+      justify-content: center;
+      margin-top: -6%;
+
+      .search-btn {
+        width: 80%;
+        font-size: 20px;
+        padding: 2%;
+        border-radius: 15px;
+        background-color: $tertiary-background;
+      }
+    }
+  }
+}

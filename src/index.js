@@ -27,36 +27,86 @@ const fetchData = () => {
       tripsData: dataSet[1].trips,
       destinationsData: dataSet[2].destinations, 
     }).then(dataSet => {
+      const loginButton = document.getElementById('login-button')
+      loginButton.addEventListener('click', domUpdates.submitLogin);
       allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
-      domUpdates.displayWelcome(traveler);
-      domUpdates.displayTravelersTrips(traveler);
-      tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
-      submitBtn.addEventListener('click', function() {
-        // domUpdates.displayNewTripCost(traveler);
-        postTrip(allTravelers, traveler);
-      });
-      domUpdates.displayTravelerCosts(traveler);
+      travelerPage(traveler, allTravelers);
+      agentPage(allTravelers);
     })
     .catch(error => console.log(error.message));
 }
 
-const loginButton = document.getElementById('login-button')
-const tripDestinations= document.getElementById('trip-destinations')
-const submitBtn = document.getElementById('submit-btn');
+// function getId(data) {
+//     const username = document.getElementById('username').value;
+//     const travelerID = Number(username.split('traveler')[1])
+//   }
 
-loginButton.addEventListener('click', domUpdates.submitLogin); 
+function travelerPage(traveler, allTravelers) {
+  const tripDestinations = document.getElementById('trip-destinations');
+  const submitBtn = document.getElementById('submit-btn');
+  const costBtn = document.getElementById('cost-btn');
+  const travelerDisplay = document.querySelector('.traveler');
+  const estimatedCost = document.querySelector('.estimated-cost')
+  if (travelerDisplay) {
+    domUpdates.displayWelcome(traveler);
+    domUpdates.displayTrips('.trip-info', traveler, "", 'getTripFormat');
+    tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
+    submitBtn.addEventListener('click', function() {
+      postTrip(allTravelers, traveler);
+    });
+    costBtn.addEventListener('click', function() {
+      domUpdates.displayNewTripCost(traveler);
+      document.addEventListener('click', function(event) {
+        const eventParent = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.classList.contains('overlay')
+        const travelerSection = document.querySelector('.traveler')
+        if (!eventParent) {
+          estimatedCost.classList.add('hidden');
+          travelerSection.classList.remove('overlay');
+        } 
+      })
+    });
+    domUpdates.displayTravelerCosts(traveler);
+  } 
+}
+
+function agentPage(allTravelers) {
+  const agentDisplay = document.querySelector('.agent');
+  if (agentDisplay) {
+    domUpdates.displayTrips('.agent-info', allTravelers, 'pending', 'getAllTripsFormat');
+    domUpdates.displayTotalRevenue(allTravelers);  
+    domUpdates.displayTodaysTravelers(allTravelers);
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('approve')) {
+        postApproveTrip(event);
+        event.target.parentNode.parentNode.classList.add('hidden');
+      } else if (event.target.classList.contains('delete')) {
+        deleteTrip(event);
+        event.target.parentNode.parentNode.classList.add('hidden');
+      }
+    });
+  } 
+}
 
 function postTrip(allTravelers, traveler) {
   const api = new ApiFetch();
   const form = document.querySelector('.trip-form');
+  const tripDetails = postTripFormat(allTravelers);
+  api.postTripRequest(tripDetails)
+    .then(data => traveler.trips.push(data.newResource))
+    .then(() => domUpdates.displayTrips('.trip-info', traveler, "", 'getTripFormat'))
+    .then(() => form.reset())
+    .catch(error => console.log(error));
+}
+
+function postTripFormat(allTravelers) {
   const username = document.getElementById('username').value;  
   let destinationName = document.getElementById('trip-destinations').value;
   const destinationID = allTravelers.destinations.find(dest => dest.destination === destinationName).id;
   const numTravelers = Number(document.getElementById('trip-travelers').value);
   const travelDate = moment(document.getElementById('trip-date').value).format('YYYY/MM/DD');
   const duration = Number(document.getElementById('trip-duration').value);
-  const tripDetails = {
+  return {
     "id": Date.now(),
     "userID": Number(username.split('traveler')[1]),
     "destinationID": destinationID,
@@ -66,12 +116,27 @@ function postTrip(allTravelers, traveler) {
     "status": "pending",
     "suggestedActivities": []
   }
-  api.postTripRequest(tripDetails)
-    .then(data => traveler.trips.push(data.newResource))
-    .then(() => console.log(traveler.trips))
-    .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
-    .then(() => form.reset())
-    .catch(error => console.log(error));
+}
+
+function postApproveTrip(event) {
+  const api = new ApiFetch();
+  const tripID = Number(event.target.closest(".approve").id.split("-")[0])
+  const approvedTripDetails = {
+    "id": tripID,
+    "status": "approved"
+  }
+  api.postApproveRequest(approvedTripDetails)
+    .then(data => data)
+    .catch(error => console.log(error))
+}
+
+function deleteTrip(event) {
+  const api = new ApiFetch();
+  const tripID = Number(event.target.closest(".delete").id.split("-")[0])
+  const deleteTripDetails = {"id": tripID}
+  api.deleteRequest(deleteTripDetails)
+    .then(data => data)
+    .catch(error => console.log(error))
 }
 
 fetchData();

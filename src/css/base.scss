@@ -2,16 +2,7 @@
 @import 'variables';  
 @import 'login';
 @import 'traveler';
-
-// *,
-// *:after,
-// *:before {
-//   border: solid 1px grey;
-//   box-sizing: border-box;
-//   color: black;
-//   margin: 0;
-//   padding: 0;
-// }
+@import 'agent';
 
 body {
   background: $primary-background;
@@ -23,13 +14,10 @@ body {
 }
 
 .overlay {
-  // filter:alpha(opacity=50);
   height:100%;
-  // left:0;
   opacity:0.5;
-  position: absolute;
+  position: relative;
   top:0;
-  // right: 0;
   width:100%;
-  // z-index:100;
+  z-index:100;
 }

@@ -8,14 +8,14 @@
       <h1>Welcome to Travel Tracker</h1>
       <section class="login">
         <label for="username">username:</label>
-        <input type="text" id="username"name="username">
+        <input type="text" id="username" name="username" class="username">
         <label for="password">password:</label>
-        <input type="password" id="password"name="password">
+        <input type="password" id="password" name="password">
         <input id="login-button" type="submit" value="Log in!">          
       </section>
     </section>
+    <section id="estimated-cost" class="estimated-cost hidden"></section>
     <section class="traveler hidden">
-      <section id="estimated-cost" class="estimated-cost hidden"></section>
       <header>
         <h1 class="welcome">Welcome Traveler!</h1>
       </header>
@@ -48,27 +48,40 @@
                 </input>
               </section>
               <section id="button"class="form-container">
-              <button id="submit-btn" class="submit-btn" type="button" name="submit">Submit</button>
+                <button id="cost-btn" class="cost-btn" type="button" name="cost">Estimated Cost</button>
+                <button id="submit-btn" class="submit-btn" type="button" name="submit">Submit</button>
               </section>
           </form>
         </section>
-        <section class="cost-info">
-          <section>
-            <p>
-              Lodging: money
-              <br>
-              Flight: money
-              <br>
-              Total: money
-              <br>
-              Fee: money
-            </p>
-          </section>
-        </section>
+        <section class="cost-info"></section>
       </div>
     </section>
     <section class="agent hidden">
-      <h1>Welcome Agent!</h1>
+      <header>
+        <h1>Welcome Agent!</h1>
+      </header>
+      <section class="agent-section">
+        <section class="agent-info"></section>
+      </section>
+      <div class="other-info">
+        <section class="revenue"></section>
+        <section class="today-travelers">
+          <h3>Today's Travelers</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Days Left</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+        </section> 
+        <section class="search">
+          <button class="search-btn">Search All Trips</button>
+        </section>
+      </div>
     </section>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>

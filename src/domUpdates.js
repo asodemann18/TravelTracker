@@ -10,7 +10,7 @@ const domUpdates = {
     if (username === 'agency' && password === 'travel2020') {
       agency.classList.remove('hidden');
       login.classList.add('hidden');
-      return 'agent' ;
+      return 'agent';
     } else if (username.includes('traveler') && 
               (username.split('traveler')[1] < 51 && username.split("traveler")[1] > 0) &&
                password === 'travel2020') {
@@ -22,24 +22,50 @@ const domUpdates = {
     }
   },
 
-  // getId() {
-  //   const username = document.getElementById('username').value;
-  //   console.log('getId', username.split('traveler')[1]);
-  //   return username.split('traveler')[1]
-  // },
-
   displayWelcome(theTraveler) {
     const welcome = document.querySelector('.welcome');
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   },
 
-  displayTravelersTrips(theTraveler, theStatus) {
-    const tripInfoSection = document.querySelector('.trip-info');
-    const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
-    const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
-    tripInfoSection.innerHTML = formattedTripDetails;    
+  displayTrips(location, travelerData, status, format) {
+    const section = document.querySelector(location);
+    const formattedTripDetails = this.getTripInfo(travelerData, status, format);
+    section.innerHTML = formattedTripDetails;  
   },
 
+  getTripInfo(theTraveler, theStatus, format) {
+    const tripDetails = theTraveler.getTrips(theStatus).sort((a, b) => moment(b.date) - moment(a.date));
+    const formattedTripDetails = tripDetails.map(detail => this[format](detail)).join('');
+    return formattedTripDetails;
+  },
+  
+  getAllTripsFormat(travelerData) {
+    return `<section class="image-container">
+              <h3>${travelerData.destination.toUpperCase()}</h3>
+              <p>
+                Name: ${travelerData.name}
+                <br>
+                Date: ${travelerData.date}
+                <br>
+                Duration: ${travelerData.duration}
+                <br>
+                Travelers: ${travelerData.travelers}
+                <br>
+                Status: ${travelerData.status}
+                <button id=${travelerData.tripID}-approve class="approve">Approve</button>
+                <button id=${travelerData.tripID}-delete class="delete">Delete</button>
+              </p>
+              <img src="${travelerData.image}" alt="${travelerData.alt}">
+            </section>`;
+  },
+
+  // addTotalCostToFormat(travelerData) {
+  //   const imageContainerSection = document.querySelector('.image-container')
+  //   console.log(imageContainerSection);
+    
+  //   console.log(travelerData.calculateTravelerCost())
+  // },
+    
   getTripFormat(travelerData) {
     return `<section class="image-container">
               <h3>${travelerData.destination.toUpperCase()}</h3>
@@ -63,12 +89,20 @@ const domUpdates = {
     costInfoSection.innerHTML = formattedCostDetails;
   },
 
+  displayTotalRevenue(allTravelers) {
+    const revenueSection = document.querySelector('.revenue');
+    const revenueDetails = allTravelers.calculateTotalCost()[0].fee;
+    revenueSection.innerHTML = `<h3>Revenue YTD</h3>
+                                <h3 class="revenue-details">$${revenueDetails}</h3>`;
+  },
+
   displayNewTripCost(theTraveler) {
     const travelerPage = document.querySelector('.traveler');
     const estimatedCost = document.querySelector('.estimated-cost');
     const destinationName = document.getElementById('trip-destinations').value;
-    const lodgingCost = theTraveler.destinations.find(dest => dest.destination === destinationName).estimatedLodgingCostPerDay
-    const flightCost = theTraveler.destinations.find(dest => dest.destination === destinationName).estimatedFlightCostPerPerson
+    const destination = theTraveler.destinations.find(dest => dest.destination === destinationName)
+    const lodgingCost = destination.estimatedLodgingCostPerDay
+    const flightCost = destination.estimatedFlightCostPerPerson
     const numTravelers = Number(document.getElementById('trip-travelers').value);
     const duration = Number(document.getElementById('trip-duration').value);
     const costDetails = {}
@@ -119,14 +153,29 @@ const domUpdates = {
 
   displayDestinationList(allData) {
     const destinationNameId = document.getElementById('destination-name');
-    const destinations = allData.destinations
+    const destinations = allData.destinations;
     const destinationNames = destinations.map(dest => this.getDestinationListFormat(dest)).join(''); 
     destinationNameId.innerHTML = destinationNames;
   },
 
   getDestinationListFormat(data) {
-    return `<option value="${data.destination}">`
-  }
+    return `<option value="${data.destination}">`;
+  },
+
+  displayTodaysTravelers(allTravelers) {
+    const testId = document.getElementById('table-body');
+    const todaysTravelersDetails = allTravelers.getTodaysTravelers(moment().format('YYYY/MM/DD'))
+    const formattedTodaysTravelersDetails = todaysTravelersDetails.map(detail => this.getTodaysTravelersFormat(detail)).join('');
+    testId.insertAdjacentHTML("beforeend", formattedTodaysTravelersDetails);
+  },
+
+  getTodaysTravelersFormat(data) {
+    return `<tr>
+              <td>${data.name}</td>
+              <td>${data.destination}</td>
+              <td>${data.daysLeft}</td>
+            </tr>`; 
+  },
 }
 
 export default domUpdates;

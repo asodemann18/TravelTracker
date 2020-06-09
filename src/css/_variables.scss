@@ -2,8 +2,71 @@ $primary-background: #A4D3EE;
 $border: solid 2px black;
 $border-radius: 15px;
 $secondary-background: white;
+$tertiary-background: #999;
 
 @mixin flexin($direction) {
   display: flex;
   flex-direction: $direction;
+}
+
+@mixin heading() {
+  header {
+    @include flexin(row);
+    grid-area: header;
+    height: 15vh;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@mixin tripsSection() {
+  height: 80vh;
+  overflow: scroll;
+}
+
+@mixin tripGrid() {
+  grid-area: "trips";
+    @include flexin(column);
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+}
+
+@mixin imageContainerFormat() {
+  width: 75%;
+  position: relative;
+  margin-bottom: 2.5%;
+  height: 50%;
+}
+
+@mixin imgFormat() {
+  width: 100%;
+  filter: grayscale(.4);
+  border-radius: $border-radius;
+}
+
+@mixin pictureHeading() {
+  position: absolute;
+  width: 96%;
+  color: $secondary-background;
+  font-size: 14px;
+  background: $tertiary-background;
+  opacity: .85;
+  padding: 2%;
+  z-index: 99;
+  text-align: center;
+}
+
+@mixin pictureInfo($bottom, $left) {
+  background: $secondary-background;
+  opacity: .9;
+  position: absolute;
+  z-index: 99;
+  text-align: center;
+  width: 50%;
+  bottom: $bottom;
+  @include flexin(column);
+  padding: 5%;
+  left: $left;
+  border-radius: $border-radius;
 }
