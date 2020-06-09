@@ -9,34 +9,27 @@ class AllTravelers {
 
   getTrips(theStatus) {
     if (theStatus === 'pending') {
-      return this.trips.filter(trip => trip.date >= moment().format('YYYY/MM/DD') && trip.status === 'pending').map(trip => {
-        const tripsDetails = {};
-        tripsDetails.tripID = trip.id;
-        tripsDetails.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
-        tripsDetails.date = trip.date;
-        tripsDetails.duration = trip.duration;
-        tripsDetails.travelers = trip.travelers;
-        tripsDetails.destination = _.find(this.destinations, dest => dest.id === trip.destinationID).destination;
-        tripsDetails.image = this.destinations.find(dest => dest.id === trip.destinationID).image;
-        tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt;
-        tripsDetails.status = trip.status;
-        return tripsDetails;
-      })
+      const filteredTrips = this.trips.filter(trip => trip.date >= moment().format('YYYY/MM/DD') && trip.status === 'pending')
+      return this.getTripDetailsFormat(filteredTrips);
     } else {
-      return this.trips.map(trip => {
-        const tripsDetails = {};
-        tripsDetails.tripID = trip.id;
-        tripsDetails.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
-        tripsDetails.date = trip.date;
-        tripsDetails.duration = trip.duration;
-        tripsDetails.travelers = trip.travelers;
-        tripsDetails.destination = this.destinations.find(dest => dest.id === trip.destinationID).destination;        
-        tripsDetails.image = this.destinations.find(dest => dest.id === trip.destinationID).image;
-        tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt || tripsDetails.destination;
-        tripsDetails.status = trip.status;
-        return tripsDetails;
-      })
+      return this.getTripDetailsFormat(this.trips);
     }
+  }
+
+  getTripDetailsFormat(data) {
+    return data.map(trip => {
+      const tripsDetails = {};
+      tripsDetails.tripID = trip.id;
+      tripsDetails.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
+      tripsDetails.date = trip.date;
+      tripsDetails.duration = trip.duration;
+      tripsDetails.travelers = trip.travelers;
+      tripsDetails.destination = _.find(this.destinations, dest => dest.id === trip.destinationID).destination;
+      tripsDetails.image = this.destinations.find(dest => dest.id === trip.destinationID).image;
+      tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt;
+      tripsDetails.status = trip.status;
+      return tripsDetails;
+    })
   }
 
   calculateTravelerCost() {

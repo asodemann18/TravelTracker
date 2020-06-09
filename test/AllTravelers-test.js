@@ -40,6 +40,23 @@ describe('AllTravelers', function() {
     expect(travelers.trips).to.equal(undefined)
   })
 
+  it('should show all travelers with the correct info display', () => {
+    const allTravelersInfo = [
+      {tripID: 1, name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
+      {tripID: 2, name: 'Rachael Vaughten', date: '2020/10/04', duration: 18, travelers: 5, destination: 'Stockholm, Sweden', image: destinationInfo[1].image, alt: destinationInfo[1].alt, status: 'pending'},
+      {tripID: 3, name: 'Sibby Dawidowitsch', date: '2020/05/22', duration: 17, travelers: 4, destination: 'Sydney, Austrailia', image: destinationInfo[2].image, alt: destinationInfo[2].alt, status: 'pending'},
+      {tripID: 4, name: 'Leila Thebeaud', date: '2020/02/25', duration: 10, travelers: 2, destination: 'Cartagena, Colombia', image: destinationInfo[3].image, alt: destinationInfo[3].alt, status: 'approved'},
+      {tripID: 5, name: 'Tiffy Grout', date: '2020/04/30', duration: 18, travelers: 3, destination: 'Madrid, Spain', image: destinationInfo[4].image, alt: destinationInfo[4].alt, status: 'approved'},
+      {tripID: 6, name: 'Laverna Flawith', date: '2020/06/29', duration: 9, travelers: 3, destination: 'Lima, Peru', image: destinationInfo[0].image, alt: destinationInfo[0].alt, status: 'approved'}
+    ]
+    expect(travelers.getTripDetailsFormat(travelers.trips)).to.deep.equal(allTravelersInfo)
+  })
+
+  it('should return an error if no argument is passed', () => {
+    expect(() => travelers.getTripDetailsFormat()).to.throw(Error);
+
+  })
+
   it('should show travelers who have a status of pending with a trip date in the future', () => {
     const pendingTravelers = [
       {tripID: 1, name: 'Ham Leadbeater', date: '2020/08/04', duration: 8, travelers: 1, destination: 'Jakarta, Indonesia', image: destinationInfo[5].image, alt: destinationInfo[5].alt, status: 'pending'},
