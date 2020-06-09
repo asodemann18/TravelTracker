@@ -75,6 +75,13 @@ const domUpdates = {
     costInfoSection.innerHTML = formattedCostDetails;
   },
 
+  displayTotalRevenue(allTravelers) {
+    const revenueSection = document.querySelector('.revenue');
+    const revenueDetails = allTravelers.calculateTotalCost()[0].fee;
+    revenueSection.innerHTML = `<h3>YTD Revenue</h3>
+                                <h3>$${revenueDetails}</h3>`;
+  },
+
   displayNewTripCost(theTraveler) {
     const travelerPage = document.querySelector('.traveler');
     const estimatedCost = document.querySelector('.estimated-cost');
@@ -131,14 +138,29 @@ const domUpdates = {
 
   displayDestinationList(allData) {
     const destinationNameId = document.getElementById('destination-name');
-    const destinations = allData.destinations
+    const destinations = allData.destinations;
     const destinationNames = destinations.map(dest => this.getDestinationListFormat(dest)).join(''); 
     destinationNameId.innerHTML = destinationNames;
   },
 
   getDestinationListFormat(data) {
-    return `<option value="${data.destination}">`
-  }
+    return `<option value="${data.destination}">`;
+  },
+
+  displayTodaysTravelers(allTravelers) {
+    const testId = document.getElementById('table-body');
+    const todaysTravelersDetails = allTravelers.getTodaysTravelers(moment().format('YYYY/MM/DD'))
+    const formattedTodaysTravelersDetails = todaysTravelersDetails.map(detail => this.getTodaysTravelersFormat(detail)).join('');
+    testId.insertAdjacentHTML("beforeend", formattedTodaysTravelersDetails);
+  },
+
+  getTodaysTravelersFormat(data) {
+      return  `<tr>
+                <td class="name">${data.name}</td>
+                <td class="destination">${data.destination}</td>
+                <td class="daysLeft">${data.daysLeft}</td>
+              </tr>`; 
+  },
 }
 
 export default domUpdates;

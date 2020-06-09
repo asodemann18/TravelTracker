@@ -61,67 +61,48 @@
     }
   }
   
-  // .info {
-  //   grid-area: "info";
+  .other-info {
+    grid-area: "info";
 
-  //   .cost-info {
-  //     background-color: $secondary-background;
-  //     @include flexin(column);
-  //     padding-bottom: 0;
-  //     margin: 10%;
-  //     font-family: Courier;
-  //     border-radius: $border-radius;
-      
-  //     // #estimated-cost {
-  //     //   position: absolute;
-  //     //   top: 50%;
-  //     //   bottom: 50%;
-  //     //   opacity: 1;
-  //     // }
+    .revenue {
+      text-align: center;
+      background: $secondary-background;
+      margin: 0% 10%;
+      margin-bottom: -7%;
+      border-radius: $border-radius;
 
-  //     h3 {
-  //       text-align: center;
-  //       font-family: Arial;
-  //     }
+      h3 {
+        padding-top: 3%;
+        margin-top: 0;
+      }
+    }
 
-  //     table {
-  //       text-align: center;
-  //       table-layout: fixed;
+    .today-travelers {
+      background-color: $secondary-background;
+      @include flexin(column);
+      padding-bottom: 0;
+      margin: 10%;
+      border-radius: $border-radius;
 
-  //       th {
-  //         padding-bottom: 3%;
-  //       }
+        h3 {
+          text-align: center;
+        }
 
-  //       td {
-  //         padding-bottom: 5%;
-  //         width: 50%;
-  //       }
+        table {
+          text-align: center;
+          table-layout: fixed;
+          margin: auto;
+          padding-bottom: 2%;
 
-  //       .total-border {
-  //         border-bottom: 2px dashed black;
-  //       }
-  //     }
-  //   }
+          th {
+            padding-bottom: 3%;
+          }
 
-  //   .request-info {
-  //     text-align: center;
-  //     background: $secondary-background;
-  //     margin: 0% 10%;
-  //     margin-bottom: -7%;
-  //     border-radius: $border-radius;
-
-  //     .form-container {
-  //       padding: 1%;
-  //     }
-
-  //     h3 {
-  //       padding-top: 3%;
-  //       margin-top: 0;
-  //     }
-
-  //     #button {
-  //       padding-bottom: 3%;
-  //     }
-  //   }
-  // }
+          td {
+            padding-bottom: 5%;
+            width: 30%;
+          }
+        }
+      }
+  }
 }

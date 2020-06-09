@@ -70,14 +70,10 @@ function agentPage(allTravelers) {
   const agentDisplay = document.querySelector('.agent');
   if (agentDisplay) {
     domUpdates.displayAllTravelersTrips(allTravelers);
-    // tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
-    // submitBtn.addEventListener('click', function() {
-    //   // domUpdates.displayNewTripCost(traveler);
-    //   postTrip(allTravelers, traveler);
-    // });
-    // domUpdates.displayTravelerCosts(allTravelers)
+    domUpdates.displayTotalRevenue(allTravelers);  
+    domUpdates.displayTodaysTravelers(allTravelers);
   } 
-  
+
 }
 
 function postTrip(allTravelers, traveler) {

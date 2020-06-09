@@ -52,19 +52,7 @@
               </section>
           </form>
         </section>
-        <section class="cost-info">
-          <section>
-            <p>
-              Lodging: money
-              <br>
-              Flight: money
-              <br>
-              Total: money
-              <br>
-              Fee: money
-            </p>
-          </section>
-        </section>
+        <section class="cost-info"></section>
       </div>
     </section>
     <section class="agent hidden">
@@ -74,6 +62,22 @@
       <section class="agent-section">
         <section class="agent-info"></section>
       </section>
+      <div class="other-info">
+        <section class="revenue"></section>
+        <section class="today-travelers">
+          <h3>Today's Travelers</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Days Left</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+        </section> 
+      </div>
     </section>
     <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
   </body>
