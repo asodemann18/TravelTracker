@@ -31,10 +31,8 @@ const fetchData = () => {
       loginButton.addEventListener('click', domUpdates.submitLogin);
       allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
-    
-
-    travelerPage(traveler, allTravelers);
-    agentPage(allTravelers);
+      travelerPage(traveler, allTravelers);
+      agentPage(allTravelers);
     })
     .catch(error => console.log(error.message));
 }
@@ -45,7 +43,7 @@ const fetchData = () => {
 //   }
 
 function travelerPage(traveler, allTravelers) {
-  const tripDestinations= document.getElementById('trip-destinations');
+  const tripDestinations = document.getElementById('trip-destinations');
   const submitBtn = document.getElementById('submit-btn');
   const costBtn = document.getElementById('cost-btn');
   const travelerDisplay = document.querySelector('.traveler');
@@ -75,7 +73,7 @@ function travelerPage(traveler, allTravelers) {
 function agentPage(allTravelers) {
   const agentDisplay = document.querySelector('.agent');
   if (agentDisplay) {
-    domUpdates.displayTrips('.agent-info', allTravelers, 'pending','getAllTripsFormat');
+    domUpdates.displayTrips('.agent-info', allTravelers, 'pending', 'getAllTripsFormat');
     domUpdates.displayTotalRevenue(allTravelers);  
     domUpdates.displayTodaysTravelers(allTravelers);
     document.addEventListener('click', function(event) {
@@ -134,7 +132,7 @@ function postApproveTrip(event) {
 
 function deleteTrip(event) {
   const api = new ApiFetch();
-  const tripID =Number(event.target.closest(".delete").id.split("-")[0])
+  const tripID = Number(event.target.closest(".delete").id.split("-")[0])
   const deleteTripDetails = {"id": tripID}
   api.deleteRequest(deleteTripDetails)
     .then(data => data)

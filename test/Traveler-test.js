@@ -12,7 +12,7 @@ describe('Traveler', function() {
     travelersInfo = travelerData;
     tripsInfo = tripsData;
     destinationInfo = destinationData;
-    traveler = new Traveler(4,travelersInfo, tripsInfo, destinationInfo);
+    traveler = new Traveler(4, travelersInfo, tripsInfo, destinationInfo);
     
   })
 
@@ -62,7 +62,7 @@ describe('Traveler', function() {
     expect(traveler.getDestinations(destinationInfo)).to.deep.equal(destinations);
   });
 
-  it('should not return an error if no argument is passed', () => {
+  it('should return an error if no argument is passed', () => {
     expect(() => { traveler.getDestinations() }).to.throw(Error)
   }) 
 })

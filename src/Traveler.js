@@ -16,7 +16,7 @@ class Traveler extends AllTravelers {
         }
       })
       return acc;
-    },[])
+    }, [])
   }
 }
 

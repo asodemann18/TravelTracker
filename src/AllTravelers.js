@@ -51,7 +51,7 @@ class AllTravelers {
   calculateTotalCost() {
     const allCosts = this.calculateTravelerCost();
     const currentYearCost = allCosts.filter(cost => moment(cost.date, 'YYYY/MM/DD').format('YYYY') === moment().format('YYYY'));
-    const costInfoOnly = _.map(currentYearCost, _.partialRight(_.pick, ['lodgingCost', 'flightCost', 'subTotal', 'fee','total']));
+    const costInfoOnly = _.map(currentYearCost, _.partialRight(_.pick, ['lodgingCost', 'flightCost', 'subTotal', 'fee', 'total']));
     return [_.mergeWith({}, ..._.map(costInfoOnly), _.add)];
   }
 

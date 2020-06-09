@@ -10,7 +10,7 @@ const domUpdates = {
     if (username === 'agency' && password === 'travel2020') {
       agency.classList.remove('hidden');
       login.classList.add('hidden');
-      return 'agent' ;
+      return 'agent';
     } else if (username.includes('traveler') && 
               (username.split('traveler')[1] < 51 && username.split("traveler")[1] > 0) &&
                password === 'travel2020') {
@@ -34,7 +34,7 @@ const domUpdates = {
   },
 
   getTripInfo(theTraveler, theStatus, format) {
-    const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
+    const tripDetails = theTraveler.getTrips(theStatus).sort((a, b) => moment(b.date) - moment(a.date));
     const formattedTripDetails = tripDetails.map(detail => this[format](detail)).join('');
     return formattedTripDetails;
   },
@@ -170,11 +170,11 @@ const domUpdates = {
   },
 
   getTodaysTravelersFormat(data) {
-      return  `<tr>
-                <td>${data.name}</td>
-                <td>${data.destination}</td>
-                <td>${data.daysLeft}</td>
-              </tr>`; 
+    return `<tr>
+              <td>${data.name}</td>
+              <td>${data.destination}</td>
+              <td>${data.daysLeft}</td>
+            </tr>`; 
   },
 }
 
