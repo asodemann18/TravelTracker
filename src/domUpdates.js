@@ -16,17 +16,11 @@ const domUpdates = {
                password === 'travel2020') {
       traveler.classList.remove('hidden');
       login.classList.add('hidden');
-      return 'username';
+      return username;
     } else {
       alert('Incorrect username or password');
     }
   },
-
-  // getId() {
-  //   const username = document.getElementById('username').value;
-  //   console.log('getId', username.split('traveler')[1]);
-  //   return username.split('traveler')[1]
-  // },
 
   displayWelcome(theTraveler) {
     const welcome = document.querySelector('.welcome');
@@ -106,8 +100,9 @@ const domUpdates = {
     const travelerPage = document.querySelector('.traveler');
     const estimatedCost = document.querySelector('.estimated-cost');
     const destinationName = document.getElementById('trip-destinations').value;
-    const lodgingCost = theTraveler.destinations.find(dest => dest.destination === destinationName).estimatedLodgingCostPerDay
-    const flightCost = theTraveler.destinations.find(dest => dest.destination === destinationName).estimatedFlightCostPerPerson
+    const destination = theTraveler.destinations.find(dest => dest.destination === destinationName)
+    const lodgingCost = destination.estimatedLodgingCostPerDay
+    const flightCost = destination.estimatedFlightCostPerPerson
     const numTravelers = Number(document.getElementById('trip-travelers').value);
     const duration = Number(document.getElementById('trip-duration').value);
     const costDetails = {}

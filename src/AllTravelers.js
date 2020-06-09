@@ -18,15 +18,16 @@ class AllTravelers {
 
   getTripDetailsFormat(data) {
     return data.map(trip => {
+      const destination = this.destinations.find(dest => dest.id === trip.destinationID)
       const tripsDetails = {};
       tripsDetails.tripID = trip.id;
       tripsDetails.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
       tripsDetails.date = trip.date;
       tripsDetails.duration = trip.duration;
       tripsDetails.travelers = trip.travelers;
-      tripsDetails.destination = _.find(this.destinations, dest => dest.id === trip.destinationID).destination;
-      tripsDetails.image = this.destinations.find(dest => dest.id === trip.destinationID).image;
-      tripsDetails.alt = this.destinations.find(dest => dest.id === trip.destinationID).alt;
+      tripsDetails.destination = destination.destination;
+      tripsDetails.image = destination.image;
+      tripsDetails.alt = destination.alt;
       tripsDetails.status = trip.status;
       return tripsDetails;
     })
@@ -34,11 +35,12 @@ class AllTravelers {
 
   calculateTravelerCost() {
     return this.trips.filter(trip => trip.date <= moment().format('YYYY/MM/DD') && trip.status === 'approved').map(trip => {
+      const destination = this.destinations.find(dest => dest.id === trip.destinationID)
       const tripsDetails = {};
       tripsDetails.userID = trip.userID;
       tripsDetails.date = trip.date;
-      tripsDetails.lodgingCost = trip.duration * this.destinations.find(dest => dest.id === trip.destinationID).estimatedLodgingCostPerDay;
-      tripsDetails.flightCost = trip.travelers * this.destinations.find(dest => dest.id === trip.destinationID).estimatedFlightCostPerPerson;
+      tripsDetails.lodgingCost = trip.duration * destination.estimatedLodgingCostPerDay;
+      tripsDetails.flightCost = trip.travelers * destination.estimatedFlightCostPerPerson;
       tripsDetails.subTotal = tripsDetails.lodgingCost + tripsDetails.flightCost;
       tripsDetails.fee = Math.round(tripsDetails.subTotal * .10);
       tripsDetails.total = tripsDetails.subTotal + tripsDetails.fee;

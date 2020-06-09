@@ -27,31 +27,48 @@ const fetchData = () => {
       tripsData: dataSet[1].trips,
       destinationsData: dataSet[2].destinations, 
     }).then(dataSet => {
+      const loginButton = document.getElementById('login-button')
+      loginButton.addEventListener('click', domUpdates.submitLogin);
       allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
-      travelerPage(traveler, allTravelers);
-      agentPage(allTravelers);
+    
+
+    travelerPage(traveler, allTravelers);
+    agentPage(allTravelers);
     })
     .catch(error => console.log(error.message));
 }
 
-const loginButton = document.getElementById('login-button')
-const tripDestinations= document.getElementById('trip-destinations')
-const submitBtn = document.getElementById('submit-btn');
-
-loginButton.addEventListener('click', domUpdates.submitLogin); 
+// function getId(data) {
+//     const username = document.getElementById('username').value;
+//     const travelerID = Number(username.split('traveler')[1])
+//   }
 
 function travelerPage(traveler, allTravelers) {
+  const tripDestinations= document.getElementById('trip-destinations');
+  const submitBtn = document.getElementById('submit-btn');
+  const costBtn = document.getElementById('cost-btn');
   const travelerDisplay = document.querySelector('.traveler');
+  const estimatedCost = document.querySelector('.estimated-cost')
   if (travelerDisplay) {
     domUpdates.displayWelcome(traveler);
     domUpdates.displayTrips('.trip-info', traveler, "", 'getTripFormat');
     tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
     submitBtn.addEventListener('click', function() {
-      // domUpdates.displayNewTripCost(traveler);
       postTrip(allTravelers, traveler);
     });
-    domUpdates.displayTravelerCosts(traveler)
+    costBtn.addEventListener('click', function() {
+      domUpdates.displayNewTripCost(traveler);
+      document.addEventListener('click', function(event) {
+        const eventParent = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.classList.contains('overlay')
+        const travelerSection = document.querySelector('.traveler')
+        if (!eventParent) {
+          estimatedCost.classList.add('hidden');
+          travelerSection.classList.remove('overlay');
+        } 
+      })
+    });
+    domUpdates.displayTravelerCosts(traveler);
   } 
 }
 
@@ -70,7 +87,6 @@ function agentPage(allTravelers) {
         event.target.parentNode.parentNode.classList.add('hidden');
       }
     });
-    // domUpdates.addTotalCostToFormat(allTravelers);
   } 
 }
 
@@ -80,7 +96,7 @@ function postTrip(allTravelers, traveler) {
   const tripDetails = postTripFormat(allTravelers);
   api.postTripRequest(tripDetails)
     .then(data => traveler.trips.push(data.newResource))
-    .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
+    .then(() => domUpdates.displayTrips('.trip-info', traveler, "", 'getTripFormat'))
     .then(() => form.reset())
     .catch(error => console.log(error));
 }
