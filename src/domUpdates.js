@@ -41,7 +41,7 @@ const domUpdates = {
   
   displayAllTravelersTrips(allTravelers) {
     const agentInfoSection = document.querySelector('.agent-info')
-    const formattedTripDetails = this.getTripInfo(allTravelers, 'pending');
+    const formattedTripDetails = this.getAllTripsInfo(allTravelers, 'pending');
     agentInfoSection.innerHTML = formattedTripDetails;  
   },
 
@@ -51,7 +51,40 @@ const domUpdates = {
     return formattedTripDetails
   },
 
+  getAllTripsInfo(theTraveler, theStatus) {
+    const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
+    const formattedTripDetails = tripDetails.map(detail => this.getAllTripsFormat(detail)).join('');
+    return formattedTripDetails
+  },
+
   
+  getAllTripsFormat(travelerData) {
+    return `<section class="image-container">
+              <h3>${travelerData.destination.toUpperCase()}</h3>
+              <p>
+                Name: ${travelerData.name}
+                <br>
+                Date: ${travelerData.date}
+                <br>
+                Duration: ${travelerData.duration}
+                <br>
+                Travelers: ${travelerData.travelers}
+                <br>
+                Status: ${travelerData.status}
+                <button id=${travelerData.tripID}-approve class="approve">Approve</button>
+                <button id="delete">Delete</button>
+              </p>
+              <img src="${travelerData.image}" alt="${travelerData.alt}">
+            </section>`;
+  },
+
+  // addTotalCostToFormat(travelerData) {
+  //   const imageContainerSection = document.querySelector('.image-container')
+  //   console.log(imageContainerSection);
+    
+  //   console.log(travelerData.calculateTravelerCost())
+  // },
+    
   getTripFormat(travelerData) {
     return `<section class="image-container">
               <h3>${travelerData.destination.toUpperCase()}</h3>
@@ -78,7 +111,7 @@ const domUpdates = {
   displayTotalRevenue(allTravelers) {
     const revenueSection = document.querySelector('.revenue');
     const revenueDetails = allTravelers.calculateTotalCost()[0].fee;
-    revenueSection.innerHTML = `<h3>YTD Revenue</h3>
+    revenueSection.innerHTML = `<h3>Revenue YTD</h3>
                                 <h3>$${revenueDetails}</h3>`;
   },
 
@@ -156,9 +189,9 @@ const domUpdates = {
 
   getTodaysTravelersFormat(data) {
       return  `<tr>
-                <td class="name">${data.name}</td>
-                <td class="destination">${data.destination}</td>
-                <td class="daysLeft">${data.daysLeft}</td>
+                <td>${data.name}</td>
+                <td>${data.destination}</td>
+                <td>${data.daysLeft}</td>
               </tr>`; 
   },
 }

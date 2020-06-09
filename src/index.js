@@ -68,12 +68,19 @@ function travelerPage(traveler, allTravelers) {
 
 function agentPage(allTravelers) {
   const agentDisplay = document.querySelector('.agent');
+
   if (agentDisplay) {
     domUpdates.displayAllTravelersTrips(allTravelers);
     domUpdates.displayTotalRevenue(allTravelers);  
     domUpdates.displayTodaysTravelers(allTravelers);
-  } 
+    const approveBtn = document.querySelector('.approve');
 
+    approveBtn.addEventListener('click', function() {
+      postApproveTrip(event);
+    })
+    
+    // domUpdates.addTotalCostToFormat(allTravelers);
+  } 
 }
 
 function postTrip(allTravelers, traveler) {
@@ -101,6 +108,21 @@ function postTrip(allTravelers, traveler) {
     .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
     .then(() => form.reset())
     .catch(error => console.log(error));
+}
+
+function postApproveTrip(event) {
+  const api = new ApiFetch();
+  
+  const tripID = Number(event.target.closest(".approve").id.split("-")[0])
+
+  const approvedTripDetails = {
+    "id": tripID,
+    "status": "approved"
+  }
+  // console.log(approvedTripDetails);
+  api.postApproveRequest(approvedTripDetails)
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
 
 fetchData();

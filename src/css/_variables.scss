@@ -3,7 +3,6 @@ $border: solid 2px black;
 $border-radius: 15px;
 $secondary-background: white;
 
-
 @mixin flexin($direction) {
   display: flex;
   flex-direction: $direction;
@@ -17,4 +16,30 @@ $secondary-background: white;
     justify-content: center;
     align-items: center;
   }
+}
+
+@mixin tripsSection() {
+  height: 80vh;
+  overflow: scroll;
+}
+
+@mixin tripGrid() {
+  grid-area: "trips";
+    @include flexin(column);
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+}
+
+@mixin imageContainerFormat() {
+  width: 75%;
+  position: relative;
+  margin-bottom: 2.5%;
+  height: 50%;
+}
+
+@mixin imgFormat() {
+  width: 100%;
+  filter: grayscale(.4);
+  border-radius: $border-radius;
 }

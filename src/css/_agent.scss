@@ -10,26 +10,16 @@
   @include heading();
 
   .agent-section {
-    height: 80vh;
-    overflow: scroll;
+    @include tripsSection;
   
     .agent-info {
-      grid-area: "trips";
-      @include flexin(column);
-      justify-content: center;
-      align-items: center;
-      overflow: scroll;
+      @include tripGrid();
 
       .image-container {
-        width: 75%;
-        position: relative;
-        margin-bottom: 2.5%;
-        height: 50%;
+        @include imageContainerFormat();
 
         img {
-          width: 100%;
-          filter: grayscale(.4);
-          border-radius: $border-radius;
+          @include imgFormat();
         }
 
         h3 {
@@ -56,6 +46,12 @@
           padding: 5%;
           left: 25%;
           border-radius: $border-radius;
+        }
+
+        button {
+          background-color: $primary-background;
+          // z-index: 99;
+          // position: absolute;
         }
       }
     }

@@ -11,6 +11,7 @@ class AllTravelers {
     if (theStatus === 'pending') {
       return this.trips.filter(trip => trip.date >= moment().format('YYYY/MM/DD') && trip.status === 'pending').map(trip => {
         const tripsDetails = {};
+        tripsDetails.tripID = trip.id;
         tripsDetails.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
         tripsDetails.date = trip.date;
         tripsDetails.duration = trip.duration;
@@ -24,6 +25,7 @@ class AllTravelers {
     } else {
       return this.trips.map(trip => {
         const tripsDetails = {};
+        tripsDetails.tripID = trip.id;
         tripsDetails.name = this.travelers.find(traveler => traveler.id === trip.userID).name;
         tripsDetails.date = trip.date;
         tripsDetails.duration = trip.duration;
