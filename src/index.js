@@ -73,11 +73,12 @@ function agentPage(allTravelers) {
     domUpdates.displayAllTravelersTrips(allTravelers);
     domUpdates.displayTotalRevenue(allTravelers);  
     domUpdates.displayTodaysTravelers(allTravelers);
-    const approveBtn = document.querySelector('.approve');
-
-    approveBtn.addEventListener('click', function() {
-      postApproveTrip(event);
-    })
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('approve')) {
+        postApproveTrip(event);
+      } else if (event.target.classList.contains('delete'))
+        deleteTrip(event);
+    });
     
     // domUpdates.addTotalCostToFormat(allTravelers);
   } 
@@ -104,7 +105,6 @@ function postTrip(allTravelers, traveler) {
   }
   api.postTripRequest(tripDetails)
     .then(data => traveler.trips.push(data.newResource))
-    .then(() => console.log(traveler.trips))
     .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
     .then(() => form.reset())
     .catch(error => console.log(error));
@@ -112,15 +112,21 @@ function postTrip(allTravelers, traveler) {
 
 function postApproveTrip(event) {
   const api = new ApiFetch();
-  
   const tripID = Number(event.target.closest(".approve").id.split("-")[0])
-
   const approvedTripDetails = {
     "id": tripID,
     "status": "approved"
   }
-  // console.log(approvedTripDetails);
   api.postApproveRequest(approvedTripDetails)
+    .then(data => data)
+    .catch(error => console.log(error))
+}
+
+function deleteTrip(event) {
+  const api = new ApiFetch();
+  const tripID =Number(event.target.closest(".delete").id.split("-")[0])
+  const deleteTripDetails = {"id": tripID}
+  api.deleteRequest(deleteTripDetails)
     .then(data => console.log(data))
     .catch(error => console.log(error))
 }

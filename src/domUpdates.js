@@ -72,7 +72,7 @@ const domUpdates = {
                 <br>
                 Status: ${travelerData.status}
                 <button id=${travelerData.tripID}-approve class="approve">Approve</button>
-                <button id="delete">Delete</button>
+                <button id=${travelerData.tripID}-delete class="delete">Delete</button>
               </p>
               <img src="${travelerData.image}" alt="${travelerData.alt}">
             </section>`;
@@ -112,7 +112,7 @@ const domUpdates = {
     const revenueSection = document.querySelector('.revenue');
     const revenueDetails = allTravelers.calculateTotalCost()[0].fee;
     revenueSection.innerHTML = `<h3>Revenue YTD</h3>
-                                <h3>$${revenueDetails}</h3>`;
+                                <h3 class="revenue-details">$${revenueDetails}</h3>`;
   },
 
   displayNewTripCost(theTraveler) {

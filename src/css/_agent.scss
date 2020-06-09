@@ -1,7 +1,7 @@
 .agent {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 15% 85%;
+  grid-template-rows: 15% 75% 10%;
   grid-template-areas:
     "header header "
     "trips info";
@@ -23,33 +23,18 @@
         }
 
         h3 {
-          position: absolute;
-          width: 96%;
-          color: $secondary-background;
-          font-size: 14px;
-          background: #999;
-          opacity: .85;
-          padding: 2%;
-          z-index: 99;
-          text-align: center;
+          @include pictureHeading();
         }
 
         p {
-          background: $secondary-background;
-          opacity: .9;
-          position: absolute;
-          z-index: 99;
-          text-align: center;
-          width: 50%;
-          bottom: 30%;
-          @include flexin(column);
-          padding: 5%;
-          left: 25%;
-          border-radius: $border-radius;
+          @include pictureInfo(12%, 20%);
+          padding-bottom: 2%;
         }
 
         button {
           background-color: $primary-background;
+          border-radius: $border-radius;
+          margin-top: 2%;
           // z-index: 99;
           // position: absolute;
         }
@@ -71,6 +56,11 @@
         padding-top: 3%;
         margin-top: 0;
       }
+
+      .revenue-details {
+        padding-bottom: 3%;
+        padding-top: 0;
+      }
     }
 
     .today-travelers {
@@ -79,6 +69,8 @@
       padding-bottom: 0;
       margin: 10%;
       border-radius: $border-radius;
+      max-height: 65%;
+      overflow: scroll;
 
         h3 {
           text-align: center;

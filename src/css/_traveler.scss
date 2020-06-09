@@ -23,29 +23,11 @@
         }
 
         h3 {
-          position: absolute;
-          width: 96%;
-          color: $secondary-background;
-          font-size: 14px;
-          background: #999;
-          opacity: .85;
-          padding: 2%;
-          z-index: 99;
-          text-align: center;
+          @include pictureHeading();
         }
 
         p {
-          background: $secondary-background;
-          opacity: .9;
-          position: absolute;
-          z-index: 99;
-          text-align: center;
-          width: 50%;
-          bottom: 30%;
-          @include flexin(column);
-          padding: 5%;
-          left: 25%;
-          border-radius: $border-radius;
+         @include pictureInfo(30%, 20%);
         }
       }
     }

@@ -43,5 +43,20 @@ class ApiFetch {
       .then(response => response.json())
       .catch(err => console.log(err.message));
   }
+
+  deleteRequest(tripDetails) {
+    let url = `${this.rootUrl}/trips/trips`;
+    return fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(tripDetails),
+    })
+      .then(response => response.json())
+      .catch(err => console.log(err.message));
+
+  }
+  // https://fe-apps.herokuapp.com/api/v1/travel-tracker/data/trips/trips
 }
 export default ApiFetch;
