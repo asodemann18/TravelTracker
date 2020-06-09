@@ -176,6 +176,13 @@ const domUpdates = {
               <td>${data.daysLeft}</td>
             </tr>`; 
   },
+
+  displaySearchPage() {
+    const searchPage = document.querySelector('.agent-search');
+    const agentPage = document.querySelector('.agent');
+    searchPage.classList.remove('hidden');
+    agentPage.classList.add('hidden');
+  }
 }
 
 export default domUpdates;
