@@ -16,7 +16,7 @@ const domUpdates = {
                password === 'travel2020') {
       traveler.classList.remove('hidden');
       login.classList.add('hidden');
-      return username;
+      return 'username';
     } else {
       alert('Incorrect username or password');
     }
@@ -33,30 +33,17 @@ const domUpdates = {
     return welcome.innerHTML = `Welcome ${theTraveler.user.name.split(" ")[0]}!`;
   },
 
-  displayTravelersTrips(theTraveler) {
-    const tripInfoSection = document.querySelector('.trip-info');
-    const formattedTripDetails = this.getTripInfo(theTraveler);
-    tripInfoSection.innerHTML = formattedTripDetails;    
-  },
-  
-  displayAllTravelersTrips(allTravelers) {
-    const agentInfoSection = document.querySelector('.agent-info')
-    const formattedTripDetails = this.getAllTripsInfo(allTravelers, 'pending');
-    agentInfoSection.innerHTML = formattedTripDetails;  
+  displayTrips(location, travelerData, status, format) {
+    const section = document.querySelector(location);
+    const formattedTripDetails = this.getTripInfo(travelerData, status, format);
+    section.innerHTML = formattedTripDetails;  
   },
 
-  getTripInfo(theTraveler, theStatus) {
+  getTripInfo(theTraveler, theStatus, format) {
     const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
-    const formattedTripDetails = tripDetails.map(detail => this.getTripFormat(detail)).join('');
-    return formattedTripDetails
+    const formattedTripDetails = tripDetails.map(detail => this[format](detail)).join('');
+    return formattedTripDetails;
   },
-
-  getAllTripsInfo(theTraveler, theStatus) {
-    const tripDetails = theTraveler.getTrips(theStatus).sort((a,b) => moment(b.date) - moment(a.date));
-    const formattedTripDetails = tripDetails.map(detail => this.getAllTripsFormat(detail)).join('');
-    return formattedTripDetails
-  },
-
   
   getAllTripsFormat(travelerData) {
     return `<section class="image-container">

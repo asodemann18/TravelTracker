@@ -31,17 +31,6 @@ const fetchData = () => {
       traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
       travelerPage(traveler, allTravelers);
       agentPage(allTravelers);
-      // agentPage(allTravelers);
-      // domUpdates.displayWelcome(traveler);
-      // domUpdates.displayTravelersTrips(traveler);
-      // tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
-      // submitBtn.addEventListener('click', function() {
-      //   // domUpdates.displayNewTripCost(traveler);
-      //   postTrip(allTravelers, traveler);
-      // });
-      // domUpdates.displayTravelerCosts(traveler);
-
-      // domUpdates.displayTravelersTrips(allTravelers, 'pending');
     })
     .catch(error => console.log(error.message));
 }
@@ -56,7 +45,7 @@ function travelerPage(traveler, allTravelers) {
   const travelerDisplay = document.querySelector('.traveler');
   if (travelerDisplay) {
     domUpdates.displayWelcome(traveler);
-    domUpdates.displayTravelersTrips(traveler);
+    domUpdates.displayTrips('.trip-info', traveler, "", 'getTripFormat');
     tripDestinations.addEventListener('click', domUpdates.displayDestinationList(allTravelers));     
     submitBtn.addEventListener('click', function() {
       // domUpdates.displayNewTripCost(traveler);
@@ -68,9 +57,8 @@ function travelerPage(traveler, allTravelers) {
 
 function agentPage(allTravelers) {
   const agentDisplay = document.querySelector('.agent');
-
   if (agentDisplay) {
-    domUpdates.displayAllTravelersTrips(allTravelers);
+    domUpdates.displayTrips('.agent-info', allTravelers, 'pending','getAllTripsFormat');
     domUpdates.displayTotalRevenue(allTravelers);  
     domUpdates.displayTodaysTravelers(allTravelers);
     document.addEventListener('click', function(event) {

@@ -54,7 +54,6 @@ describe('AllTravelers', function() {
 
   it('should return an error if no argument is passed', () => {
     expect(() => travelers.getTripDetailsFormat()).to.throw(Error);
-
   })
 
   it('should show travelers who have a status of pending with a trip date in the future', () => {
