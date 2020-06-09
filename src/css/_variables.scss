@@ -2,6 +2,7 @@ $primary-background: #A4D3EE;
 $border: solid 2px black;
 $border-radius: 15px;
 $secondary-background: white;
+$tertiary-background: #999;
 
 @mixin flexin($direction) {
   display: flex;
@@ -49,7 +50,7 @@ $secondary-background: white;
   width: 96%;
   color: $secondary-background;
   font-size: 14px;
-  background: #999;
+  background: $tertiary-background;
   opacity: .85;
   padding: 2%;
   z-index: 99;

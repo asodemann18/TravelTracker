@@ -35,8 +35,6 @@
           background-color: $primary-background;
           border-radius: $border-radius;
           margin-top: 2%;
-          // z-index: 99;
-          // position: absolute;
         }
       }
     }
@@ -69,7 +67,7 @@
       padding-bottom: 0;
       margin: 10%;
       border-radius: $border-radius;
-      max-height: 65%;
+      max-height: 55%;
       overflow: scroll;
 
         h3 {
@@ -91,6 +89,20 @@
             width: 30%;
           }
         }
+    }
+
+    .search {
+      @include flexin(row);
+      justify-content: center;
+      margin-top: -6%;
+
+      .search-btn {
+        width: 80%;
+        font-size: 20px;
+        padding: 2%;
+        border-radius: 15px;
+        background-color: $tertiary-background;
       }
+    }
   }
 }

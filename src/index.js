@@ -76,10 +76,12 @@ function agentPage(allTravelers) {
     document.addEventListener('click', function(event) {
       if (event.target.classList.contains('approve')) {
         postApproveTrip(event);
-      } else if (event.target.classList.contains('delete'))
+        event.target.parentNode.parentNode.classList.add('hidden');
+      } else if (event.target.classList.contains('delete')) {
         deleteTrip(event);
+        event.target.parentNode.parentNode.classList.add('hidden');
+      }
     });
-    
     // domUpdates.addTotalCostToFormat(allTravelers);
   } 
 }
@@ -127,7 +129,7 @@ function deleteTrip(event) {
   const tripID =Number(event.target.closest(".delete").id.split("-")[0])
   const deleteTripDetails = {"id": tripID}
   api.deleteRequest(deleteTripDetails)
-    .then(data => console.log(data))
+    .then(data => data)
     .catch(error => console.log(error))
 }
 
