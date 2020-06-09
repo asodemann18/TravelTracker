@@ -89,13 +89,22 @@ function agentPage(allTravelers) {
 function postTrip(allTravelers, traveler) {
   const api = new ApiFetch();
   const form = document.querySelector('.trip-form');
+  const tripDetails = postTripFormat(allTravelers);
+  api.postTripRequest(tripDetails)
+    .then(data => traveler.trips.push(data.newResource))
+    .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
+    .then(() => form.reset())
+    .catch(error => console.log(error));
+}
+
+function postTripFormat(allTravelers) {
   const username = document.getElementById('username').value;  
   let destinationName = document.getElementById('trip-destinations').value;
   const destinationID = allTravelers.destinations.find(dest => dest.destination === destinationName).id;
   const numTravelers = Number(document.getElementById('trip-travelers').value);
   const travelDate = moment(document.getElementById('trip-date').value).format('YYYY/MM/DD');
   const duration = Number(document.getElementById('trip-duration').value);
-  const tripDetails = {
+  return {
     "id": Date.now(),
     "userID": Number(username.split('traveler')[1]),
     "destinationID": destinationID,
@@ -105,11 +114,6 @@ function postTrip(allTravelers, traveler) {
     "status": "pending",
     "suggestedActivities": []
   }
-  api.postTripRequest(tripDetails)
-    .then(data => traveler.trips.push(data.newResource))
-    .then(() => domUpdates.displayTravelersTrips(traveler, 'pending'))
-    .then(() => form.reset())
-    .catch(error => console.log(error));
 }
 
 function postApproveTrip(event) {
