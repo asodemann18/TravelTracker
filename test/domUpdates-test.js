@@ -8,14 +8,24 @@ chai.use(spies)
 describe('DOM Manipulation', function () {
   beforeEach(function() {
     global.document = {};
-    chai.spy.on(document, "querySelector", () => {return global.document});
-    chai.spy.on(document, "getElementById", () => {})
+    chai.spy.on(document, "querySelector", () => {
+      return {
+        classList: {
+          add: () => {},
+          remove: () => {}
+        },
+      };
+    });
   });
-  it('should call submitLogin', function() {
-    domUpdates.submitLogin();
-    expect(document.querySelector).to.have.been.called(1);
-    expect(document.querySelector).to.have.been.called.with(".login-container");
-    expect(document.getElementById).to.have.been.called(1);
-    expect(document.getElementById).to.have.been.called.with("username");
-  })
+
+  it('should be an object', () => {
+    expect(domUpdates).to.be.an('object');
+  });
+
+  it('should spy on querySelector functions being called on the document', () => {
+    domUpdates.displaySearchPage();
+    expect(document.querySelector).to.have.been.called(2);
+    expect(document.querySelector).to.have.been.called.with(".agent-search");
+    expect(document.querySelector).to.have.been.called.with(".agent");
+  });
 })
