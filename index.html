@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Travel Tracker</title>
+  </head>
+  <body>
+    <section class="login-container">
+      <h1>Welcome to Travel Tracker</h1>
+      <section class="login">
+        <label for="username">username:</label>
+        <input type="text" id="username" name="username" class="username">
+        <label for="password">password:</label>
+        <input type="password" id="password" name="password">
+        <input id="login-button" type="submit" value="Log in!">          
+      </section>
+    </section>
+    <section id="estimated-cost" class="estimated-cost hidden"></section>
+    <section class="traveler hidden">
+      <header>
+        <h1 class="welcome">Welcome Traveler!</h1>
+      </header>
+      <section class="trip-section">
+        <section class="trip-info"></section>
+      </section>
+      <div class="info">
+        <section class="request-info">
+          <form class="trip-form "method="post">
+              <h3>Request A New Trip Here:</h3>
+              <section class="form-container">
+              <label for="trip-date">Trip Date:</label>
+              <input id="trip-date" type="date" name="trip-date" value=""></input>
+              </section>
+              <section class="form-container">
+              <label for="trip-duration">Duration:</label>
+              <input id="trip-duration" type="number" name="trip-duration" min="0"></input>
+              </section>
+              <section class="form-container">
+                <label for="trip-travelers">Travelers:</label>
+                <input id="trip-travelers" type="number" name="trip-travelers" min="1"></input>
+              </section>
+              <section class="form-container">
+                <label for="trip-destinations">Destination:</label>
+                <input id="trip-destinations" type="text" name="trip-destinations" list="destination-name">
+                  <datalist id="destination-name">
+                    <!-- <option value="Lima, Peru"> -->
+                    <!-- <option value="Cambridge"> -->
+                  </datalist>
+                </input>
+              </section>
+              <section id="button"class="form-container">
+                <button id="cost-btn" class="cost-btn" type="button" name="cost">Estimated Cost</button>
+                <button id="submit-btn" class="submit-btn" type="button" name="submit">Submit</button>
+              </section>
+          </form>
+        </section>
+        <section class="cost-info"></section>
+      </div>
+    </section>
+    <section class="agent hidden">
+      <header>
+        <h1>Welcome Agent!</h1>
+      </header>
+      <section class="agent-section">
+        <section class="agent-info"></section>
+      </section>
+      <div class="other-info">
+        <section class="revenue"></section>
+        <section class="today-travelers">
+          <h3>Today's Travelers</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Days Left</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+        </section> 
+        <section class="search">
+          <button class="search-btn">Search All Trips</button>
+        </section>
+      </div>
+    </section>
+    <section class="agent-search hidden">
+      <header>
+        <h1>All Trips</h1>
+      </header>
+    </section>
+  <script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
