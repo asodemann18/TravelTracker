@@ -28,9 +28,9 @@ const domUpdates = {
   },
 
   displayTrips(location, travelerData, status, format) {
-    const section = document.querySelector(location);
+    const pageSection = document.querySelector(location);
     const formattedTripDetails = this.getTripInfo(travelerData, status, format);
-    section.innerHTML = formattedTripDetails;  
+    pageSection.innerHTML = formattedTripDetails;  
   },
 
   getTripInfo(theTraveler, theStatus, format) {
@@ -58,13 +58,6 @@ const domUpdates = {
               <img src="${travelerData.image}" alt="${travelerData.alt}">
             </section>`;
   },
-
-  // addTotalCostToFormat(travelerData) {
-  //   const imageContainerSection = document.querySelector('.image-container')
-  //   console.log(imageContainerSection);
-    
-  //   console.log(travelerData.calculateTravelerCost())
-  // },
     
   getTripFormat(travelerData) {
     return `<section class="image-container">
@@ -176,6 +169,13 @@ const domUpdates = {
               <td>${data.daysLeft}</td>
             </tr>`; 
   },
+
+  displaySearchPage() {
+    const searchPage = document.querySelector('.agent-search');
+    const agentPage = document.querySelector('.agent');
+    searchPage.classList.remove('hidden');
+    agentPage.classList.add('hidden');
+  }
 }
 
 export default domUpdates;

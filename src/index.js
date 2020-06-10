@@ -1,11 +1,5 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 import moment from 'moment'
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 import ApiFetch from './ApiFetch';
 import domUpdates from './domUpdates';
@@ -27,20 +21,34 @@ const fetchData = () => {
       tripsData: dataSet[1].trips,
       destinationsData: dataSet[2].destinations, 
     }).then(dataSet => {
-      const loginButton = document.getElementById('login-button')
-      loginButton.addEventListener('click', domUpdates.submitLogin);
-      allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
-      traveler = new Traveler(2, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
-      travelerPage(traveler, allTravelers);
-      agentPage(allTravelers);
+      getDynamicUser(dataSet);
     })
     .catch(error => console.log(error.message));
 }
 
-// function getId(data) {
-//     const username = document.getElementById('username').value;
-//     const travelerID = Number(username.split('traveler')[1])
-//   }
+function getId() {
+  const username = document.getElementById('username').value;
+  if (username.includes('traveler')) {
+    const travelerID = Number(username.split('traveler')[1]);
+    return Number(travelerID);
+  }
+}
+
+function getDynamicUser(dataSet) {
+  const loginButton = document.getElementById('login-button')
+  loginButton.addEventListener('click', function() {
+    domUpdates.submitLogin();
+    const travelID = getId()
+    if (travelID === undefined) {
+      allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
+      agentPage(allTravelers);
+    } else { 
+      allTravelers = new AllTravelers(dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData); 
+      traveler = new Traveler(travelID, dataSet.travelersData, dataSet.tripsData, dataSet.destinationsData);
+      travelerPage(traveler, allTravelers);
+    }
+  })
+}
 
 function travelerPage(traveler, allTravelers) {
   const tripDestinations = document.getElementById('trip-destinations');
@@ -72,6 +80,7 @@ function travelerPage(traveler, allTravelers) {
 
 function agentPage(allTravelers) {
   const agentDisplay = document.querySelector('.agent');
+  const searchButton = document.querySelector('.search-btn');
   if (agentDisplay) {
     domUpdates.displayTrips('.agent-info', allTravelers, 'pending', 'getAllTripsFormat');
     domUpdates.displayTotalRevenue(allTravelers);  
@@ -85,6 +94,7 @@ function agentPage(allTravelers) {
         event.target.parentNode.parentNode.classList.add('hidden');
       }
     });
+    searchButton.addEventListener('click', domUpdates.displaySearchPage);
   } 
 }
 
