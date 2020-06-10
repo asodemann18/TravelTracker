@@ -1,4 +1,4 @@
-# Travel Tracker
+# [Travel Tracker](https://asodemann18.github.io/TravelTracker/)
 
 # About
 An application that manages and tracks different trips for both users and a travel agency.
@@ -21,6 +21,19 @@ An application that manages and tracks different trips for both users and a trav
 ![Approve-Delete](http://g.recordit.co/XWKBt65vQC.gif)
 
 ## Setup
+[View it here](https://asodemann18.github.io/TravelTracker/)
+
+Log in instructions for traveler:
+```bash
+username: traveler1-50 (ex: traveler2)
+password: travel2020
+```
+Log in instructions for Agent:
+```bash
+username: agency
+password: travel2020
+```
+
 ```bash
 git clone [file path]
 cd TravelTracker
