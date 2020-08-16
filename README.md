@@ -1,15 +1,17 @@
 # [Travel Tracker](https://asodemann18.github.io/TravelTracker/)
 
-# About
+## Project By: [Alex Sodemann](https://github.com/asodemann18)
+
+## About
 An application that manages and tracks different trips for both users and a travel agency.
 
-# Project Goals
+## Project Goals
 * Use OOP to drive the design of the application and the code
 * Work with an API to send and receive data
 * Solidify the code review process
 * Create a robust test suite that thoroughly tests all functionality of a client-side application
 
-# In Action
+## In Action
 
 ### Traveler's Side:
 ![Traveler's Side](http://g.recordit.co/R2zLSaER9r.gif)
